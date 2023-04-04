@@ -49,3 +49,11 @@
 
   padding-bottom: 30px;
 }
+
+/* One of the steps I have tried so far */
+@media screen and (max-width: 320px) {
+  .card {
+    box-sizing: border-box;
+    width: auto;
+  }
+}
