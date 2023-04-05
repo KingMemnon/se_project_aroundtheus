@@ -23,7 +23,6 @@
 
 .profile__edit-button:hover {
   border: 1px solid rgba(255, 255, 255, 0.6);
-  background: transparent url(../images/Vectoreditpen.svg) center no-repeat;
 }
 
 .profile__add-button {
@@ -42,6 +41,9 @@
 }
 
 .profile__title {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
   font-family: "Inter", Arial, sans-serif;
   font-style: normal;
   font-size: 42px;
@@ -52,6 +54,10 @@
 }
 
 .profile__description {
+  text-overflow: ellipsis;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
   font-family: "Inter", Arial, sans-serif;
   font-style: normal;
   font-size: 18px;
@@ -84,18 +90,12 @@
   .profile__add-button {
     margin: 0;
     max-width: calc(100% - 38px);
-    white-space: nowrap;
-    overflow: hidden;
     font-size: 22px;
     line-height: 27px;
     margin-right: 10px;
     text-align: center;
   }
   .profile__description {
-    text-overflow: ellipsis;
-    width: 100%;
-    white-space: nowrap;
-    overflow: hidden;
     font-size: 14px;
     line-height: 17px;
     text-align: center;
@@ -108,9 +108,6 @@
 
 @media screen and (max-width: 520px) {
   .profile__title {
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
     font-size: 22px;
     line-height: 27px;
     margin-right: 10px;
@@ -119,13 +116,9 @@
 
   .profile__add-button {
     width: 282px;
-    height: 50px;
     margin: auto;
   }
   .profile__description {
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
     font-size: 14px;
     line-height: 17px;
     text-align: center;
