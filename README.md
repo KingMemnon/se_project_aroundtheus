@@ -14,7 +14,7 @@ HTML, and CSS were used in creating this responsive website with the use of grid
 
 - [Link to the project on Figma](https://www.figma.com/file/Es8zZP3ARGH9JGcw60i3OD/Sprint-3_-Around-the-US?node-id=7505-2&t=f3To4EqmqKQbNuuL-0)
 
-- [Link to project on Github](https://github.com/KingMemnon/se_project_aroundtheus)
+- [Link to project on Github](https://kingmemnon.github.io/se_project_aroundtheus/)
 
 **IMAGES**
 
