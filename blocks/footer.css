@@ -16,10 +16,8 @@
 
 @media screen and (max-width: 722px) {
   .footer__copyright {
-    width: auto;
-  }
-  .footer__copyright {
     font-size: 14px;
     line-height: 17px;
+    width: auto;
   }
 }
