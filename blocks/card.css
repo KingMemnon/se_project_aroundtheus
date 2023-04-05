@@ -2,7 +2,6 @@
   border-radius: 10px;
   overflow: hidden;
   width: 282px;
-  height: 361px;
   display: flex;
   flex-direction: column;
   list-style: none;
@@ -46,14 +45,10 @@
   border-color: transparent;
   width: 21px;
   height: 18px;
-
+  cursor: pointer;
   padding-bottom: 30px;
 }
 
-/* One of the steps I have tried so far */
-@media screen and (max-width: 320px) {
-  .card {
-    box-sizing: border-box;
-    width: auto;
-  }
+.card__like-button:hover {
+  opacity: 0.5;
 }

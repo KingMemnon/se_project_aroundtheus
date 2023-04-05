@@ -18,7 +18,14 @@
   width: 24px;
   border: 1px solid white;
   grid-area: button;
+  cursor: pointer;
 }
+
+.profile__edit-button:hover {
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  background: transparent url(../images/Vectoreditpen.svg) center no-repeat;
+}
+
 .profile__add-button {
   background: transparent url(../images/Vectoraddbutton.svg) center no-repeat;
   height: 50px;
@@ -27,6 +34,11 @@
   border: 2px solid white;
   border-radius: 2px;
   margin-left: auto;
+  cursor: pointer;
+}
+
+.profile__add-button:hover {
+  opacity: 0.6;
 }
 
 .profile__title {
@@ -65,9 +77,7 @@
   .profile__info {
     display: flex;
     flex-wrap: wrap;
-    width: 100%;
-    padding-left: 62px;
-    padding-right: 62px;
+    max-width: calc(100% - 38px);
     box-sizing: border-box;
   }
   .profile__description {
@@ -76,6 +86,58 @@
   }
   .profile__add-button {
     margin: 0;
-    width: 100%;
+    max-width: calc(100% - 38px);
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 22px;
+    line-height: 27px;
+    margin-right: 10px;
+    text-align: center;
+  }
+  .profile__description {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+  }
+  .profile__edit-button {
+    height: 18px;
+    width: 18px;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .profile__description {
+    margin: 14px 0 36px;
+    text-align: center;
+  }
+  .profile__title {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 22px;
+    line-height: 27px;
+    margin-right: 10px;
+    text-align: center;
+  }
+
+  .profile__add-button {
+    width: 282px;
+    height: 50px;
+    margin: auto;
+  }
+  .profile__description {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+  }
+  .profile__edit-button {
+    height: 18px;
+    width: 18px;
   }
 }
