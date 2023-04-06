@@ -128,13 +128,6 @@
     margin: auto;
   }
   .profile__description {
-    font-size: 14px;
-    line-height: 17px;
-    text-align: center;
     margin: 0 36px;
-  }
-  .profile__edit-button {
-    height: 18px;
-    width: 18px;
   }
 }
