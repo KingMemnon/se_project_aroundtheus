@@ -115,7 +115,7 @@
   .profile__title {
     font-size: 22px;
     line-height: 27px;
-    margin-right: 10px;
+    max-width: 200px;
     text-align: center;
   }
 
