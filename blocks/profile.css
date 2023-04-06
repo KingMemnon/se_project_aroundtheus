@@ -6,6 +6,8 @@
 
 .profile__info {
   display: grid;
+  align-items: baseline;
+  grid-gap: 18px;
   grid-template-areas:
     "title button"
     "description description";
@@ -82,6 +84,9 @@
   }
   .profile__info {
     display: flex;
+    grid-gap: 10px;
+    margin-bottom: 36px;
+    justify-content: center;
     flex-wrap: wrap;
     max-width: calc(100% - 38px);
     box-sizing: border-box;
@@ -114,6 +119,10 @@
     text-align: center;
   }
 
+  .profile__image {
+    margin: 0 0 30px;
+  }
+
   .profile__add-button {
     width: 282px;
     margin: auto;
@@ -122,7 +131,7 @@
     font-size: 14px;
     line-height: 17px;
     text-align: center;
-    margin: 14px 0 36px;
+    margin: 0 36px;
   }
   .profile__edit-button {
     height: 18px;

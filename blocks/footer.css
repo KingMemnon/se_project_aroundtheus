@@ -20,4 +20,7 @@
     line-height: 17px;
     width: auto;
   }
+  .footer {
+    max-width: 270px;
+  }
 }
