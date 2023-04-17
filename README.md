@@ -1,4 +1,4 @@
-**PROJECT 3: AROUND THE U.S**
+# Project Name: Around The U.S.
 
 Overview:
 
