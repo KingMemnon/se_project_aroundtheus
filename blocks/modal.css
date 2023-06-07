@@ -1,5 +1,4 @@
 .modal {
-  /* display: flex; */
   display: none;
   position: fixed;
   top: 0;
@@ -35,10 +34,6 @@
   width: 40px;
   height: 40px;
   border: none;
-}
-
-.modal_closed {
-  display: none;
 }
 
 .modal__heading {
