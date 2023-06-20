@@ -30,7 +30,9 @@ const initialCards = [
   },
 ];
 
-//  Element  \\
+/**================================================================================================
+ *                                         ELEMENT
+ *================================================================================================**/
 
 const profileEditButton = document.querySelector("#profile-edit-button");
 const profileEditModal = document.querySelector("#profile-edit-modal");
@@ -43,13 +45,17 @@ const profileDescriptionInput = document.querySelector(
 );
 const profileEditForm = profileEditModal.querySelector(".modal__form");
 
-// FUNCTION
+/**================================================================================================
+ *                                         FUNCTION
+ *================================================================================================**/
 
 function closePopop() {
   profileEditModal.classList.remove("modal_opened");
 }
 
-// EVENT HANDLERS
+/**------------------------------------------------------------------------------------------------
+ *                                         EVENT HANDLERS
+ *------------------------------------------------------------------------------------------------**/
 
 function handleProfileEditSubmit(e) {
   e.preventDefault();
@@ -58,7 +64,9 @@ function handleProfileEditSubmit(e) {
   closePopop();
 }
 
-//  EVENT LISTENERS
+/**================================================================================================
+ *                                         EVENT LISTENERS
+ *================================================================================================**/
 profileEditButton.addEventListener("click", () => {
   profileTitleInput.value = profileTitle.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
