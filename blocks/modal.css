@@ -63,26 +63,26 @@
 }
 
 .modal__form-title {
-  border-top: none;
-  border-left: none;
-  border-right: none;
   width: 100%;
-  opacity: 0.2;
-  margin-bottom: 57px;
+  height: 47px;
+  border: 0;
+  font-size: 14px;
+  line-height: 17px;
+  box-sizing: border-box;
+  padding: 10px 0 0;
+  margin-bottom: 10px;
   border-bottom: 1px solid #000;
 }
 
-input::placeholder {
-  height: 27px;
-  padding-bottom: 13px;
-}
 .modal__form-description {
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  margin-bottom: 48px;
   width: 100%;
-  opacity: 0.2;
+  height: 47px;
+  border: 0;
+  font-size: 14px;
+  line-height: 17px;
+  box-sizing: border-box;
+  padding: 10px 0 0;
+  margin-bottom: 10px;
   border-bottom: 1px solid #000;
 }
 
@@ -103,6 +103,7 @@ input::placeholder {
   border: none;
   border-radius: 2px;
   padding: 0 36px;
+  margin-top: 48px;
 }
 
 @media only screen and (max-width: 520px) {
@@ -113,6 +114,7 @@ input::placeholder {
 
   .modal__heading {
     font-size: 1.2rem;
+    width: 100%;
   }
 
   .modal__form-title,
@@ -123,5 +125,6 @@ input::placeholder {
 
   .modal__button {
     padding: 8px;
+    margin-top: 45px;
   }
 }

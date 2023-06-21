@@ -79,8 +79,8 @@ function handleProfileEditSubmit(e) {
  *                                         EVENT LISTENERS
  *================================================================================================**/
 profileEditButton.addEventListener("click", () => {
-  profileTitleInput.value = profileTitle.textContent;
-  profileDescriptionInput.value = profileDescription.textContent;
+  profileTitleInput.value = profileTitle.innerText;
+  profileDescriptionInput.value = profileDescription.innerText;
   profileEditModal.classList.add("modal_opened");
 });
 
@@ -90,5 +90,5 @@ profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 
 initialCards.forEach((cardData) => {
   const cardElement = getCardElement(cardData);
-  cardListEl.prepend(cardElement);
+  cardListEl.append(cardElement);
 });
