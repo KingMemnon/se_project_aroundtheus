@@ -77,10 +77,14 @@
   background-position: center;
   margin-right: 24px;
 }
-@media screen and (max-width: 722px) {
+@media screen and (max-width: 900px) {
   .profile {
     background-color: black;
     flex-direction: column;
+  }
+  .profile_page_section {
+    padding: 40px, 40px, 0;
+    box-sizing: border-box;
   }
   .profile__info {
     display: flex;
@@ -89,7 +93,6 @@
     justify-content: center;
     flex-wrap: wrap;
     max-width: calc(100% - 38px);
-    box-sizing: border-box;
   }
 
   .profile__add-button {
