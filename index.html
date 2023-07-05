@@ -47,7 +47,11 @@
               Explorer
             </p>
           </div>
-          <button class="profile__add-button" type="button"></button>
+          <button
+            class="profile__add-button"
+            type="button"
+            id="profile-add-button"
+          ></button>
         </section>
         <section class="cards page__section">
           <ul class="cards__list"></ul>
@@ -57,6 +61,7 @@
         <p class="footer__copyright">© 2023 Around the U.S. - C.Dunbar</p>
       </footer>
     </div>
+    <!-- Edit Modal --->
     <div class="modal" id="profile-edit-modal">
       <div class="modal__container">
         <button
@@ -84,11 +89,40 @@
         </form>
       </div>
     </div>
+    <!--================= Add New Card Modal ================-->
+
+    <div class="modal" id="add-image-modal">
+      <div class="modal__container">
+        <button
+          class="modal__close"
+          type="button"
+          id="add-image-modal-close"
+        ></button>
+        <h2 class="modal__heading">New Place</h2>
+        <form class="modal__image-card">
+          <input
+            class="modal__input modal__input_type_title"
+            type="text"
+            name="title"
+            id="card-name-input"
+            placeholder="Title"
+          />
+          <input
+            class="modal__input modal__input_type_url"
+            type="text"
+            name="url "
+            id="card-image-input"
+            placeholder="Image link"
+          />
+          <button class="modal__button" type="submit">Create</button>
+        </form>
+      </div>
+    </div>
     <template id="card-template">
       <li class="card">
-        <img src="" alt="" class="card__image" />
+        <img src="" alt="" class="card__image" id="card-image-js" />
         <div class="card__description">
-          <h2 class="card__title"></h2>
+          <h2 class="card__title" id="card-title-js"></h2>
           <button class="card__like-button" type="button"></button>
         </div>
       </li>
