@@ -45,6 +45,7 @@ const profileTitleInput = document.querySelector("#profile-name-input");
 const profileDescriptionInput = document.querySelector(
   "#profile-description-input"
 );
+
 /*================================ Add New Card ==============================*/
 
 const profileAddButton = document.querySelector("#profile-add-button");
@@ -79,11 +80,31 @@ function closePopop() {
 }
 const cardTemplate =
   document.querySelector("#card-template").content.firstElementChild;
-
+/**----------------------
+ * Function for Cards being generated
+ *------------------------**/
 function getCardElement(cardData) {
   const cardElement = cardTemplate.cloneNode(true);
   const cardImageEl = cardElement.querySelector(".card__image");
   const cardTitleEl = cardElement.querySelector(".card__title");
+  const likeButton = cardElement.querySelector(".card__like-button");
+  //find delete button
+
+  // position absolute place in right corner
+
+  //add the event listener to the delete button
+
+  // call cardElement.remove()
+
+  //add click listener to the cardImage element
+
+  //openModal with previewImageModal
+
+  //read thread on stacKOverflow, hint will need to use visibility hidden, and not display none
+
+  likeButton.addEventListener("click", () => {
+    likeButton.classList.toggle("card__like-button_active");
+  });
   cardTitleEl.textContent = cardData.name;
   cardImageEl.src = cardData.link;
   cardImageEl.alt = cardData.name;
