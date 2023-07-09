@@ -56,12 +56,19 @@ const addNewCardImage = document.querySelector("#card-image-js");
 const newCardTitleInput = document.querySelector("#card-name-input");
 const newCardImageInput = document.querySelector("#card-image-input");
 
-const profileEditForm = document.querySelector(".modal__form");
-const newCardEditForm = document.querySelector(".modal__image-card");
+const profileEditForm = profileEditModal.querySelector(".modal__form");
+const newCardEditForm =
+  addNewCardImageModal.querySelector(".modal__image-card");
 
 const cardListEl = document.querySelector(".cards__list");
-const cardTemplate =
-  document.querySelector("#card-template").content.firstElementChild;
+const cardTitleInput = addNewCardImageModal.querySelector(
+  ".modal__input_type_title"
+);
+const cardUrlInput = addNewCardImageModal.querySelector(
+  ".modal__input_type_url"
+);
+
+document.querySelector("#card-template").content.firstElementChild;
 /**================================================================================================
  *                                         FUNCTION
  *================================================================================================**/
@@ -70,6 +77,8 @@ function closePopop() {
   profileEditModal.classList.remove("modal_opened");
   addNewCardImageModal.classList.remove("modal_opened");
 }
+const cardTemplate =
+  document.querySelector("#card-template").content.firstElementChild;
 
 function getCardElement(cardData) {
   const cardElement = cardTemplate.cloneNode(true);
@@ -80,6 +89,7 @@ function getCardElement(cardData) {
   cardImageEl.alt = cardData.name;
   return cardElement;
 }
+
 /**------------------------------------------------------------------------------------------------
  *                                         EVENT HANDLERS
  *------------------------------------------------------------------------------------------------**/
@@ -89,6 +99,16 @@ function handleProfileEditSubmit(e) {
   profileTitle.textContent = profileTitleInput.value;
   profileDescription.textContent = profileDescriptionInput.value;
   closePopop();
+}
+
+function handleNewCardEditFormSubmit(e) {
+  e.preventDefault();
+  const name = cardTitleInput.value;
+  const link = cardUrlInput.value;
+  const cardElement = getCardElement({ name, link });
+  cardListEl.prepend(cardElement);
+  closePopop();
+  newCardEditForm.reset();
 }
 
 /**================================================================================================
@@ -108,8 +128,9 @@ profileAddButton.addEventListener("click", () => {
 });
 
 addNewCardModalClose.addEventListener("click", closePopop);
+newCardEditForm.addEventListener("submit", handleNewCardEditFormSubmit);
 
 initialCards.forEach((cardData) => {
   const cardElement = getCardElement(cardData);
-  cardListEl.append(cardElement);
+  cardListEl.prepend(cardElement);
 });
