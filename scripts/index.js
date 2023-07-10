@@ -88,13 +88,7 @@ function getCardElement(cardData) {
   const cardImageEl = cardElement.querySelector(".card__image");
   const cardTitleEl = cardElement.querySelector(".card__title");
   const likeButton = cardElement.querySelector(".card__like-button");
-  //find delete button
-
-  // position absolute place in right corner
-
-  //add the event listener to the delete button
-
-  // call cardElement.remove()
+  const dislikeButton = cardElement.querySelector(".card__delete-button");
 
   //add click listener to the cardImage element
 
@@ -105,6 +99,10 @@ function getCardElement(cardData) {
   likeButton.addEventListener("click", () => {
     likeButton.classList.toggle("card__like-button_active");
   });
+  dislikeButton.addEventListener("click", () => {
+    cardElement.remove();
+  });
+
   cardTitleEl.textContent = cardData.name;
   cardImageEl.src = cardData.link;
   cardImageEl.alt = cardData.name;
