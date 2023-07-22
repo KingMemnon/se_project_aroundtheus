@@ -1,5 +1,8 @@
 .modal {
-  display: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
   position: fixed;
   top: 0;
   left: 0;
@@ -7,11 +10,14 @@
   bottom: 0;
   padding: 0 19px;
   background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
   z-index: 999;
+  transition: visibility 0.5s, opacity 0.5s linear;
 }
 
 .modal_opened {
-  display: flex;
+  visibility: visible;
+  opacity: 1;
 }
 
 .modal__container {
@@ -117,6 +123,31 @@
 
 .modal__button:hover {
   opacity: 0.6;
+}
+.modal__card-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  flex-direction: column;
+
+  width: 433px;
+  height: 540px;
+  z-index: 9999;
+}
+.modal__image {
+  background: transparent;
+}
+
+.modal__image-text {
+  font-family: "Inter", Arial, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  color: #fff;
+  width: 291px;
+  height: 12px;
+  background-color: transparent;
 }
 
 @media only screen and (max-width: 520px) {

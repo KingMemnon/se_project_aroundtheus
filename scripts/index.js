@@ -69,7 +69,16 @@ const cardUrlInput = addNewCardImageModal.querySelector(
   ".modal__input_type_url"
 );
 
+/**========================================================================
+ *                           Image Popup
+ *========================================================================**/
 document.querySelector("#card-template").content.firstElementChild;
+const imagePopupModal = document.querySelector("#preview-image-modal");
+const imagePopupModalCloseBttn = document.querySelector(
+  "#image-modal-popup-close"
+);
+const imagePopupModalImage = document.querySelector("#preview-image-modal-img");
+
 /**================================================================================================
  *                                         FUNCTION
  *================================================================================================**/
@@ -77,6 +86,7 @@ document.querySelector("#card-template").content.firstElementChild;
 function closePopop() {
   profileEditModal.classList.remove("modal_opened");
   addNewCardImageModal.classList.remove("modal_opened");
+  imagePopupModal.classList.remove("modal_opened");
 }
 const cardTemplate =
   document.querySelector("#card-template").content.firstElementChild;
@@ -90,7 +100,13 @@ function getCardElement(cardData) {
   const likeButton = cardElement.querySelector(".card__like-button");
   const dislikeButton = cardElement.querySelector(".card__delete-button");
 
-  //add click listener to the cardImage element
+  /**======================
+   **      event listener for card images
+   *========================**/
+
+  /**----------------------
+   **      close button
+   *------------------------**/
 
   //openModal with previewImageModal
 
@@ -106,9 +122,26 @@ function getCardElement(cardData) {
   cardTitleEl.textContent = cardData.name;
   cardImageEl.src = cardData.link;
   cardImageEl.alt = cardData.name;
+
+  cardImageEl.addEventListener("click", () => {
+    openImageModal(cardData.link);
+  });
   return cardElement;
 }
+/**======================
+ **      function to open image modal
+ *========================**/
+function openImageModal(url) {
+  imagePopupModalImage.src = url;
+  imagePopupModal.classList.add("modal_opened");
+}
 
+function addEventListenersToCardImages() {
+  const cardImages = document.querySelectorAll(".card__image");
+  cardImages.forEach((cardImage) => {
+    cardImage.addEventListener("click", handleCardImageClick);
+  });
+}
 /**------------------------------------------------------------------------------------------------
  *                                         EVENT HANDLERS
  *------------------------------------------------------------------------------------------------**/
@@ -129,7 +162,12 @@ function handleNewCardEditFormSubmit(e) {
   closePopop();
   newCardEditForm.reset();
 }
-
+function handleCardImageClick(e) {
+  if (e.target.classList.contains("card__image")) {
+    const imageUrl = e.target.getAttribute("src");
+    openImageModal(imageUrl);
+  }
+}
 /**================================================================================================
  *                                         EVENT LISTENERS
  *================================================================================================**/
@@ -146,8 +184,12 @@ profileAddButton.addEventListener("click", () => {
   addNewCardImageModal.classList.add("modal_opened");
 });
 
-addNewCardModalClose.addEventListener("click", closePopop);
 newCardEditForm.addEventListener("submit", handleNewCardEditFormSubmit);
+imagePopupModalCloseBttn.addEventListener("click", closePopop);
+
+/**============================================
+ *               Initialization
+ *=============================================**/
 
 initialCards.forEach((cardData) => {
   const cardElement = getCardElement(cardData);
