@@ -78,6 +78,7 @@ const imagePopupModalCloseBttn = document.querySelector(
   "#image-modal-popup-close"
 );
 const imagePopupModalImage = document.querySelector("#preview-image-modal-img");
+const imageText = document.querySelector("#image-caption");
 
 /**================================================================================================
  *                                         FUNCTION
@@ -124,15 +125,16 @@ function getCardElement(cardData) {
   cardImageEl.alt = cardData.name;
 
   cardImageEl.addEventListener("click", () => {
-    openImageModal(cardData.link);
+    openImageModal(cardData.link, cardData.name);
   });
   return cardElement;
 }
 /**======================
  **      function to open image modal
  *========================**/
-function openImageModal(url) {
+function openImageModal(url, name) {
   imagePopupModalImage.src = url;
+  imageText.textContent = name;
   imagePopupModal.classList.add("modal_opened");
 }
 
