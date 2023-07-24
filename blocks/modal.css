@@ -24,9 +24,6 @@
   background-color: white;
   margin: auto;
   position: relative;
-  /* top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); */
   max-width: 430px;
   width: 100%;
   min-height: 330px;
@@ -53,12 +50,6 @@
   height: 40px;
   border: none;
   z-index: 9999;
-}
-
-#image-modal-popup-close {
-  position: absolute;
-  bottom: calc(100% + 110px);
-  left: calc(100% + 160px);
 }
 
 .modal__close:hover {
@@ -143,17 +134,16 @@
 }
 .modal__card-image {
   background-color: transparent;
-  position: relative;
-  top: 50%;
-  left: 50%;
-  margin-top: 200px;
-  transform: translate(-50%, -50%);
   max-width: 75vw;
   max-height: 75vh;
   z-index: 99;
 }
-.modal__image {
+
+.modal__image-container {
+  display: flex;
+  flex-direction: column;
   background: transparent;
+  position: relative;
 }
 
 .modal__image-text {
