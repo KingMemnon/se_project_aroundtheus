@@ -185,6 +185,8 @@ profileAddButton.addEventListener("click", () => {
 });
 
 newCardEditForm.addEventListener("submit", handleNewCardEditFormSubmit);
+addNewCardModalClose.addEventListener("click", closePopop);
+
 imagePopupModalCloseBttn.addEventListener("click", closePopop);
 
 /**============================================
