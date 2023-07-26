@@ -30,10 +30,6 @@
   padding: 36px;
   border-radius: 10px;
 }
-#preview-image-modal {
-  max-width: 100%;
-  object-fit: cover;
-}
 
 .modal__close {
   background-color: transparent;

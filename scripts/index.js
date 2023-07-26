@@ -72,7 +72,7 @@ const cardUrlInput = addNewCardImageModal.querySelector(
 /**========================================================================
  *                           Image Popup
  *========================================================================**/
-document.querySelector("#card-template").content.firstElementChild;
+
 const imagePopupModal = document.querySelector("#preview-image-modal");
 const imagePopupModalCloseBttn = document.querySelector(
   "#image-modal-popup-close"
@@ -84,11 +84,10 @@ const imageText = document.querySelector("#image-caption");
  *                                         FUNCTION
  *================================================================================================**/
 
-function closePopop() {
-  profileEditModal.classList.remove("modal_opened");
-  addNewCardImageModal.classList.remove("modal_opened");
-  imagePopupModal.classList.remove("modal_opened");
+function togglePopup(popup) {
+  popup.classList.toggle("modal_opened");
 }
+
 const cardTemplate =
   document.querySelector("#card-template").content.firstElementChild;
 /**----------------------
@@ -99,24 +98,16 @@ function getCardElement(cardData) {
   const cardImageEl = cardElement.querySelector(".card__image");
   const cardTitleEl = cardElement.querySelector(".card__title");
   const likeButton = cardElement.querySelector(".card__like-button");
-  const dislikeButton = cardElement.querySelector(".card__delete-button");
+  const deleteButton = cardElement.querySelector(".card__delete-button");
 
   /**======================
    **      event listener for card images
    *========================**/
 
-  /**----------------------
-   **      close button
-   *------------------------**/
-
-  //openModal with previewImageModal
-
-  //read thread on stacKOverflow, hint will need to use visibility hidden, and not display none
-
   likeButton.addEventListener("click", () => {
     likeButton.classList.toggle("card__like-button_active");
   });
-  dislikeButton.addEventListener("click", () => {
+  deleteButton.addEventListener("click", () => {
     cardElement.remove();
   });
 
@@ -134,15 +125,9 @@ function getCardElement(cardData) {
  *========================**/
 function openImageModal(url, name) {
   imagePopupModalImage.src = url;
+  imagePopupModalImage.alt = `Photo of ${name}`;
   imageText.textContent = name;
-  imagePopupModal.classList.add("modal_opened");
-}
-
-function addEventListenersToCardImages() {
-  const cardImages = document.querySelectorAll(".card__image");
-  cardImages.forEach((cardImage) => {
-    cardImage.addEventListener("click", handleCardImageClick);
-  });
+  togglePopup(imagePopupModal);
 }
 /**------------------------------------------------------------------------------------------------
  *                                         EVENT HANDLERS
@@ -152,7 +137,7 @@ function handleProfileEditSubmit(e) {
   e.preventDefault();
   profileTitle.textContent = profileTitleInput.value;
   profileDescription.textContent = profileDescriptionInput.value;
-  closePopop();
+  closePopup();
 }
 
 function handleNewCardEditFormSubmit(e) {
@@ -161,14 +146,8 @@ function handleNewCardEditFormSubmit(e) {
   const link = cardUrlInput.value;
   const cardElement = getCardElement({ name, link });
   cardListEl.prepend(cardElement);
-  closePopop();
+  closePopup();
   newCardEditForm.reset();
-}
-function handleCardImageClick(e) {
-  if (e.target.classList.contains("card__image")) {
-    const imageUrl = e.target.getAttribute("src");
-    openImageModal(imageUrl);
-  }
 }
 /**================================================================================================
  *                                         EVENT LISTENERS
@@ -176,20 +155,26 @@ function handleCardImageClick(e) {
 profileEditButton.addEventListener("click", () => {
   profileTitleInput.value = profileTitle.innerText;
   profileDescriptionInput.value = profileDescription.innerText;
-  profileEditModal.classList.add("modal_opened");
+  togglePopup(profileEditModal);
 });
 
-profileEditCloseButton.addEventListener("click", closePopop);
+profileEditCloseButton.addEventListener("click", () => {
+  togglePopup(profileEditModal);
+});
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 
 profileAddButton.addEventListener("click", () => {
-  addNewCardImageModal.classList.add("modal_opened");
+  togglePopup(addNewCardImageModal);
 });
 
 newCardEditForm.addEventListener("submit", handleNewCardEditFormSubmit);
-addNewCardModalClose.addEventListener("click", closePopop);
+addNewCardModalClose.addEventListener("click", () => {
+  togglePopup(addNewCardImageModal);
+});
 
-imagePopupModalCloseBttn.addEventListener("click", closePopop);
+imagePopupModalCloseBttn.addEventListener("click", () => {
+  togglePopup(imagePopupModal);
+});
 
 /**============================================
  *               Initialization
