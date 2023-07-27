@@ -137,6 +137,7 @@ function handleProfileEditSubmit(e) {
   e.preventDefault();
   profileTitle.textContent = profileTitleInput.value;
   profileDescription.textContent = profileDescriptionInput.value;
+  togglePopup(profileEditModal);
 }
 
 function handleNewCardEditFormSubmit(e) {
@@ -146,6 +147,7 @@ function handleNewCardEditFormSubmit(e) {
   const cardElement = getCardElement({ name, link });
   cardListEl.prepend(cardElement);
   newCardEditForm.reset();
+  togglePopup(addNewCardImageModal);
 }
 /**================================================================================================
  *                                         EVENT LISTENERS
