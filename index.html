@@ -77,7 +77,12 @@
             name="title"
             id="profile-name-input"
             placeholder="Name"
+            placeholder="Title"
+            minlength="2"
+            maxlength="40"
+            required
           />
+          <span class="modal__error"></span>
           <input
             class="modal__input"
             type="text"
@@ -105,7 +110,6 @@
             type="text"
             name="title"
             id="card-name-input"
-            placeholder="Title"
           />
           <input
             class="modal__input modal__input_type_url"
@@ -159,5 +163,6 @@
       </li>
     </template>
     <script src="./scripts/index.js" defer></script>
+    <script src="./scripts/validation.js" defer></script>
   </body>
 </html>
