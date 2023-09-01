@@ -41,10 +41,8 @@ const profileEditCloseButton = document.querySelector(
 );
 const profileTitle = document.querySelector("#profile-title-js");
 const profileDescription = document.querySelector("#profile-description-js");
-const profileTitleInput = document.querySelector("#profile-name-input");
-const profileDescriptionInput = document.querySelector(
-  "#profile-description-input"
-);
+const profileTitleInput = document.querySelector("#profile-name");
+const profileDescriptionInput = document.querySelector("#profile-description");
 
 /*================================ Add New Card ==============================*/
 

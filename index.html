@@ -75,21 +75,25 @@
             class="modal__form-title"
             type="text"
             name="title"
-            id="profile-name-input"
+            id="profile-name"
             placeholder="Name"
             placeholder="Title"
             minlength="2"
             maxlength="40"
             required
           />
-          <span class="modal__error"></span>
+          <span class="modal__error" id="profile-name-error"></span>
           <input
             class="modal__input"
             type="text"
             name="description"
-            id="profile-description-input"
+            id="profile-description"
             placeholder="Description"
+            minlength="2"
+            maxlength="200"
+            required
           />
+          <span class="modal__error" id="profile-description-error"></span>
           <button class="modal__button" type="submit">Save</button>
         </form>
       </div>
