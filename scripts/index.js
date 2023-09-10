@@ -118,6 +118,9 @@ function getCardElement(cardData) {
   });
   return cardElement;
 }
+function hideModal(modal) {
+  modal.style.display = "none";
+}
 /**======================
  **      function to open image modal
  *========================**/
@@ -150,6 +153,7 @@ function handleNewCardEditFormSubmit(e) {
 /**================================================================================================
  *                                         EVENT LISTENERS
  *================================================================================================**/
+
 profileEditButton.addEventListener("click", () => {
   profileTitleInput.value = profileTitle.innerText;
   profileDescriptionInput.value = profileDescription.innerText;
@@ -173,6 +177,24 @@ addNewCardModalClose.addEventListener("click", () => {
 imagePopupModalCloseBttn.addEventListener("click", () => {
   togglePopup(imagePopupModal);
 });
+const modals = [profileEditModal, addNewCardImageModal, imagePopupModal];
+
+function closeByEscape(evt) {
+  if (evt.key === "Escape") {
+    hideModal(modals);
+  }
+}
+
+window.onclick = function (event) {
+  for (const modal of modals) {
+    if (event.target === modal) {
+      hideModal(modal);
+      break;
+    }
+  }
+};
+
+document.addEventListener("keydown", closeByEscape);
 
 /**============================================
  *               Initialization
