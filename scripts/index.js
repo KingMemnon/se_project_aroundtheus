@@ -83,6 +83,11 @@ const imageText = document.querySelector("#image-caption");
  *================================================================================================**/
 
 function togglePopup(popup) {
+  if (popup.classList.contains("modal_opened")) {
+    document.removeEventListener("keydown", closeByEscape);
+  } else {
+    document.addEventListener("keydown", closeByEscape);
+  }
   popup.classList.toggle("modal_opened");
 }
 
@@ -181,7 +186,8 @@ const modals = [profileEditModal, addNewCardImageModal, imagePopupModal];
 
 function closeByEscape(evt) {
   if (evt.key === "Escape") {
-    hideModal(modals);
+    const openModal = document.querySelector(".modal_opened");
+    togglePopup(openModal);
   }
 }
 
@@ -193,8 +199,6 @@ window.onclick = function (event) {
     }
   }
 };
-
-document.addEventListener("keydown", closeByEscape);
 
 /**============================================
  *               Initialization
