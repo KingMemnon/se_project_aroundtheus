@@ -65,6 +65,7 @@
 
 .modal__form {
   display: flex;
+  position: relative;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -125,6 +126,15 @@
   margin-top: 48px;
 }
 
+.modal__button:disabled {
+  background-color: #fff;
+  color: grey;
+  border: 1px solid grey;
+  text-decoration: none;
+  cursor: not-allowed;
+  opacity: 0.2;
+}
+
 .modal__button:hover {
   opacity: 0.6;
 }
@@ -157,12 +167,15 @@
 
 .modal__error {
   font-family: "Inter", Arial, sans-serif;
+  position: absolute;
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
   width: 164px;
   height: 12px;
   color: #f00;
+  top: 49px;
+  left: 0px;
 }
 
 @media only screen and (max-width: 520px) {

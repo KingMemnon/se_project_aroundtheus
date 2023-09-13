@@ -123,9 +123,6 @@ function getCardElement(cardData) {
   });
   return cardElement;
 }
-function hideModal(modal) {
-  modal.style.display = "none";
-}
 /**======================
  **      function to open image modal
  *========================**/
@@ -191,14 +188,15 @@ function closeByEscape(evt) {
   }
 }
 
-window.onclick = function (event) {
-  for (const modal of modals) {
-    if (event.target === modal) {
-      hideModal(modal);
-      break;
-    }
+function handleCloseByClick(evt) {
+  if (evt.target.classList.contains("modal")) {
+    togglePopup(evt.target);
   }
-};
+}
+
+modals.forEach((modal) => {
+  modal.addEventListener("click", handleCloseByClick);
+});
 
 /**============================================
  *               Initialization
