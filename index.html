@@ -71,29 +71,34 @@
         ></button>
         <h2 class="modal__heading">Edit Profile</h2>
         <form class="modal__form">
-          <input
-            class="modal__form-title"
-            type="text"
-            name="title"
-            id="profile-name"
-            placeholder="Name"
-            placeholder="Title"
-            minlength="2"
-            maxlength="40"
-            required
-          />
-          <span class="modal__error" id="profile-name-error"></span>
-          <input
-            class="modal__input"
-            type="text"
-            name="description"
-            id="profile-description"
-            placeholder="Description"
-            minlength="2"
-            maxlength="200"
-            required
-          />
-          <span class="modal__error" id="profile-description-error"></span>
+          <div class="modal__wrapper">
+            <input
+              class="modal__form-title modal__input"
+              type="text"
+              name="title"
+              id="profile-name"
+              placeholder="Name"
+              placeholder="Title"
+              minlength="2"
+              maxlength="40"
+              required
+            />
+            <span class="modal__error" id="profile-name-error"></span>
+          </div>
+          <div class="modal__wrapper">
+            <input
+              class="modal__input"
+              type="text"
+              name="description"
+              id="profile-description"
+              placeholder="Description"
+              minlength="2"
+              maxlength="200"
+              required
+            />
+
+            <span class="modal__error" id="profile-description-error"></span>
+          </div>
           <button class="modal__button" type="submit" disabled>Save</button>
         </form>
       </div>
@@ -108,24 +113,30 @@
           id="add-image-modal-close"
         ></button>
         <h2 class="modal__heading">New Place</h2>
-        <form class="modal__image-card">
-          <input
-            class="modal__input modal__input_type_title"
-            type="text"
-            name="title"
-            id="card-name-input"
-            minlength="1"
-            maxlength="30"
-            required
-          />
-          <input
-            class="modal__input modal__input_type_url"
-            type="url"
-            name="url"
-            id="card-image-input"
-            placeholder="Image link"
-            required
-          />
+        <form class="modal__image-card modal__form">
+          <div class="modal__wrapper">
+            <input
+              class="modal__input"
+              type="text"
+              name="title"
+              id="card-name-input"
+              minlength="1"
+              maxlength="30"
+              required
+            />
+          </div>
+          <div class="modal__wrapper">
+            <span class="modal__error" id="card-name-input-error"></span>
+            <input
+              class="modal__input"
+              type="url"
+              name="url"
+              id="card-image-input"
+              placeholder="Image link"
+              required
+            />
+            <span class="modal__error" id="card-image-input-error"></span>
+          </div>
           <button class="modal__button" type="submit" disabled>Create</button>
         </form>
       </div>

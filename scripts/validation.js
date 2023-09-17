@@ -1,11 +1,12 @@
 const config = {
   formSelector: ".modal__form",
-  inputSelector: ".modal__form-title",
-  submitButtonSelector: ".modal__button ",
+  inputSelector: ".modal__input",
+  submitButtonSelector: ".modal__button",
   inactiveButtonClass: "popup__button_disabled",
   inputErrorClass: "popup__input_type_error",
   errorClass: "popup__error_visible",
 };
+
 //escape and overlay
 
 function showInputError(formEl, inputEl, { inputErrorClass, errorClass }) {
@@ -35,6 +36,7 @@ function hasInvalidInput(inputList) {
 //disableButton
 //enableButton
 function toggleButtonState(inputEls, submitButton, { inactiveButtonClass }) {
+  console.log("Toggling button state");
   if (hasInvalidInput(inputEls)) {
     submitButton.classList.add(inactiveButtonClass);
     submitButton.disabled = true;
