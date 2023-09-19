@@ -125,12 +125,14 @@
   border: 1px solid grey;
   text-decoration: none;
   cursor: not-allowed;
+  pointer-events: none;
   opacity: 0.2;
 }
 
 .modal__button:hover {
   opacity: 0.6;
 }
+
 .modal__card-image {
   background-color: transparent;
   max-width: 75vw;
