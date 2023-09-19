@@ -60,12 +60,8 @@ const newCardEditForm =
   addNewCardImageModal.querySelector(".modal__image-card");
 
 const cardListEl = document.querySelector(".cards__list");
-const cardTitleInput = addNewCardImageModal.querySelector(
-  ".modal__input_type_title"
-);
-const cardUrlInput = addNewCardImageModal.querySelector(
-  ".modal__input_type_url"
-);
+const cardTitleInput = addNewCardImageModal.querySelector(".modal__input");
+const cardUrlInput = addNewCardImageModal.querySelector(".modal__input");
 
 /**========================================================================
  *                           Image Popup

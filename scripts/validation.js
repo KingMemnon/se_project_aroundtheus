@@ -36,7 +36,6 @@ function hasInvalidInput(inputList) {
 //disableButton
 //enableButton
 function toggleButtonState(inputEls, submitButton, { inactiveButtonClass }) {
-  console.log("Toggling button state");
   if (hasInvalidInput(inputEls)) {
     submitButton.classList.add(inactiveButtonClass);
     submitButton.disabled = true;
