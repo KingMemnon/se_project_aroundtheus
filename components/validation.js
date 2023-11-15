@@ -63,8 +63,8 @@ enableValidation() {
 }
 
 disableValidation(){
-  this._inputElements.ForEach((inputElement)=>{
-    this._hideInputError(inputElement);
+  this._inputElements.ForEach((inputEl)=>{
+    this._hideInputError(inputEl);
   });
  this._toggleButtonState();
  this._formElement.reset();
@@ -72,5 +72,5 @@ disableValidation(){
 }
 
 const formElelemt = document.querySelector(config.formSelector);
-const formValidator = new FormValidator(config,formElelemt);
+const formValidator = new FormValdator(config,formElelemt);
 FormValidator.enableValidation();
