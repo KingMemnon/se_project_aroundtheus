@@ -72,5 +72,5 @@ disableValidation(){
 }
 
 const formElelemt = document.querySelector(config.formSelector);
-const formValidator = new FormValdator(config,formElelemt);
+const formValidator = new FormValidator(config,formElelemt);
 FormValidator.enableValidation();
