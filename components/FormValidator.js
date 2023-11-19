@@ -49,6 +49,7 @@ _toggleButtonState() {
   }
 }
 
+
 //Event Listeners
 _setEventListeners() {
  this.inputElements.forEach((inputElement)=>{
@@ -63,13 +64,14 @@ enableValidation() {
 }
 
 disableValidation(){
-  this._inputElements.ForEach((inputEl)=>{
-    this._hideInputError(inputEl);
+  this._inputElements.ForEach((inputElement)=>{
+    this._hideInputError(inputElement);
   });
  this._toggleButtonState();
  this._formElement.reset();
   }
 }
+
 
 const formElelemt = document.querySelector(config.formSelector);
 const formValidator = new FormValidator(config,formElelemt);
