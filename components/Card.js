@@ -45,6 +45,7 @@ export default class Card {
     //get the card view
     //set event listeners
     this._setEventListeners();
+    return this._cardElement;
     //return the card
   }
 }
