@@ -1,4 +1,22 @@
 import Card from "../components/Card.js";
+import FormValidator from "../components/FormValidator.js";
+
+const config = {
+  formSelector: "modal__form",
+  inputSelector: ".modal__input",
+  submitButtonSelector: ".modal__button",
+  inactiveButtonClass: "popup__button_disabled",
+  inputErrorClass: "popup__input_type_error",
+  errorClass: "popup__error_visible",
+};
+
+const addCardForm = document.querySelector("#add-card-form");
+const addCardValidator = new FormValidator(config, addCardForm);
+addCardValidator.enableValidation();
+
+const editProfileForm = document.querySelector("#edit-profile-modal");
+const editProfileValidator = new FormValidator(config, editProfileForm);
+editProfileValidator.enableValidation();
 
 const initialCards = [
   {

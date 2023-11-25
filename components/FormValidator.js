@@ -79,7 +79,3 @@ export default class FormValidator {
     this._formElement.reset();
   }
 }
-
-const formElement = document.querySelector(config.formSelector);
-const formValidator = new FormValidator(config, formElement);
-formValidator.enableValidation();
