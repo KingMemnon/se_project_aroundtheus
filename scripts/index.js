@@ -10,6 +10,8 @@ const config = {
   errorClass: "popup__error_visible",
 };
 
+const cardSelector = "#card-template";
+
 const addCardForm = document.querySelector("#add-card-form");
 const addCardValidator = new FormValidator(config, addCardForm);
 addCardValidator.enableValidation();
@@ -119,9 +121,9 @@ const cardTemplate =
 /**----------------------
  * Function for Cards being generated
  *------------------------**/
-function getCardElement(cardData, cardSelector, handleImageClick) {
+function getCardElement(cardData) {
   const card = new Card(cardData, cardSelector, handleImageClick);
-  return card.getView(this._cardElement);
+  return card.getView();
 }
 // function getCardElement(cardData) {
 //   const cardElement = cardTemplate.cloneNode(true);
@@ -145,15 +147,12 @@ function getCardElement(cardData, cardSelector, handleImageClick) {
 //   cardImageEl.src = cardData.link;
 //   cardImageEl.alt = cardData.name;
 
-//   cardImageEl.addEventListener("click", () => {
-//     openImageModal(cardData.link, cardData.name);
-//   });
 //   return cardElement;
 // }
 /**======================
  **      function to open image modal
  *========================**/
-function openImageModal(url, name) {
+function handleImageClick(url, name) {
   imagePopupModalImage.src = url;
   imagePopupModalImage.alt = `Photo of ${name}`;
   imageText.textContent = name;
