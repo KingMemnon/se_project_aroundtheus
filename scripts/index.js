@@ -89,8 +89,8 @@ const newCardEditForm =
   addNewCardImageModal.querySelector(".modal__image-card");
 
 const cardListEl = document.querySelector(".cards__list");
-const cardTitleInput = addNewCardImageModal.querySelector(".modal__input");
-const cardUrlInput = addNewCardImageModal.querySelector(".modal__input");
+const cardTitleInput = addNewCardImageModal.querySelector("#card-name-input");
+const cardUrlInput = addNewCardImageModal.querySelector("#card-image-input");
 
 /**========================================================================
  *                           Image Popup
@@ -173,6 +173,8 @@ function handleNewCardEditFormSubmit(e) {
   e.preventDefault();
   const name = cardTitleInput.value;
   const link = cardUrlInput.value;
+  console.log(0);
+  console.log(name, link);
   const cardElement = getCardElement({ name, link });
   cardListEl.prepend(cardElement);
   newCardEditForm.reset();
