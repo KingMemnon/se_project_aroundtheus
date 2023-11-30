@@ -152,7 +152,7 @@ function getCardElement(cardData) {
 /**======================
  **      function to open image modal
  *========================**/
-function handleImageClick(url, name) {
+function handleImageClick(name, url) {
   imagePopupModalImage.src = url;
   imagePopupModalImage.alt = `Photo of ${name}`;
   imageText.textContent = name;

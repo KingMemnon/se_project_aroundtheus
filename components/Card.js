@@ -22,7 +22,7 @@ export default class Card {
       });
 
     this._cardImageEl.addEventListener("click", () => {
-      this._handleImageClick();
+      this._handleImageClick(this._name, this._link);
     });
   }
 
@@ -47,6 +47,7 @@ export default class Card {
       .addEventListener("click", () => {
         this._handleImageClick(this._name, this._link);
       });
+    console.log(this._handleImageClick);
   }
 
   getView() {
