@@ -172,7 +172,7 @@ profileEditButton.addEventListener("click", () => {
 profileEditCloseButton.addEventListener("click", () => {
   togglePopup(profileEditModal);
 });
-profileEditForm.addEventListener("submit", handleProfileEditSubmit);
+addCardFormElement.addEventListener("submit", handleProfileEditSubmit);
 
 profileAddButton.addEventListener("click", () => {
   togglePopup(addNewCardImageModal);
