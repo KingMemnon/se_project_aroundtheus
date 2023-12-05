@@ -12,12 +12,12 @@ const config = {
 
 const cardSelector = "#card-template";
 
-const addCardForm = document.querySelector("#add-card-form");
-const addCardValidator = new FormValidator(config, addCardForm);
+const addCardFormElement = document.querySelector("#add-card-form");
+const addCardValidator = new FormValidator(config, addCardFormElement);
 addCardValidator.enableValidation();
 
-const editProfileForm = document.querySelector("#edit-profile-modal");
-const editProfileValidator = new FormValidator(config, editProfileForm);
+const editProfileFormElement = document.querySelector("#edit-profile-modal");
+const editProfileValidator = new FormValidator(config, editProfileFormElement);
 editProfileValidator.enableValidation();
 
 const initialCards = [
