@@ -151,6 +151,7 @@ function handleNewCardEditFormSubmit(e) {
   e.preventDefault();
   const name = cardTitleInput.value;
   const link = cardUrlInput.value;
+  0;
   console.log(0);
   console.log(name, link);
   const cardElement = getCardElement({ name, link });
@@ -175,6 +176,7 @@ profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 
 profileAddButton.addEventListener("click", () => {
   togglePopup(addNewCardImageModal);
+  addCardValidator.resetValidation();
 });
 
 newCardEditForm.addEventListener("submit", handleNewCardEditFormSubmit);

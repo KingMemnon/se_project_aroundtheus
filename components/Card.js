@@ -17,8 +17,7 @@ export default class Card {
     );
     this._cardTitleEl.textContent = this._name;
     this._cardImageEl.src = this._link;
-
-    this._setEventListeners();
+    this._cardImageEl.alt = `Image of ${this._name}`;
   }
 
   _setEventListeners() {

@@ -48,6 +48,11 @@ export default class FormValidator {
   //disableButton
   //enableButton
   _toggleButtonState() {
+    const isInputEmpty = this._inputElements.every(
+      (input) => input.value.trim() === ""
+    );
+    const _hasInvalidInput = this._hasInvalidInput();
+
     if (this._hasInvalidInput()) {
       this._submitButton.classList.add(this._inactiveButtonClass);
       this._submitButton.disabled = true;
