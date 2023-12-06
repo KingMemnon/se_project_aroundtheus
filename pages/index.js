@@ -12,10 +12,6 @@ const config = {
 
 const cardSelector = "#card-template";
 
-const addCardFormElement = document.querySelector("#add-card-form");
-const addCardValidator = new FormValidator(config, addCardFormElement);
-addCardValidator.enableValidation();
-
 const editProfileFormElement = document.querySelector("#edit-profile-modal");
 const editProfileValidator = new FormValidator(config, editProfileFormElement);
 editProfileValidator.enableValidation();
@@ -52,10 +48,10 @@ const initialCards = [
   },
 ];
 
-const cardData = {
-  name: "Yosemite Valley",
-  link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
-};
+// const cardData = {
+//   name: "Yosemite Valley",
+//   link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
+// };
 
 /**================================================================================================
  *                                         ELEMENT
@@ -77,14 +73,16 @@ const profileAddButton = document.querySelector("#profile-add-button");
 const addNewCardImageModal = document.querySelector("#add-image-modal");
 const addNewCardModalClose = document.querySelector("#add-image-modal-close");
 
-const addNewCardTitle = document.querySelector("#card-title-js");
-const addNewCardImage = document.querySelector("#card-image-js");
-const newCardTitleInput = document.querySelector("#card-name-input");
-const newCardImageInput = document.querySelector("#card-image-input");
+// const addNewCardTitle = document.querySelector("#card-title-js");
+// const addNewCardImage = document.querySelector("#card-image-js");
+// const newCardTitleInput = document.querySelector("#card-name-input");
+// const newCardImageInput = document.querySelector("#card-image-input");
 
-const profileEditForm = profileEditModal.querySelector(".modal__form");
+// const profileEditForm = profileEditModal.querySelector(".modal__form");
 const newCardEditForm =
   addNewCardImageModal.querySelector(".modal__image-card");
+const addCardValidator = new FormValidator(config, newCardEditForm);
+addCardValidator.enableValidation();
 
 const cardListEl = document.querySelector(".cards__list");
 const cardTitleInput = addNewCardImageModal.querySelector("#card-name-input");
@@ -114,8 +112,8 @@ function togglePopup(popup) {
   popup.classList.toggle("modal_opened");
 }
 
-const cardTemplate =
-  document.querySelector("#card-template").content.firstElementChild;
+// const cardTemplate =
+//   document.querySelector("#card-template").content.firstElementChild;
 /**----------------------
  * Function for Cards being generated
  *------------------------**/
@@ -172,7 +170,6 @@ profileEditButton.addEventListener("click", () => {
 profileEditCloseButton.addEventListener("click", () => {
   togglePopup(profileEditModal);
 });
-addCardFormElement.addEventListener("submit", handleProfileEditSubmit);
 
 profileAddButton.addEventListener("click", () => {
   togglePopup(addNewCardImageModal);
