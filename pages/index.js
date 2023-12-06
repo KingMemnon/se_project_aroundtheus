@@ -47,12 +47,6 @@ const initialCards = [
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg ",
   },
 ];
-
-// const cardData = {
-//   name: "Yosemite Valley",
-//   link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
-// };
-
 /**================================================================================================
  *                                         ELEMENT
  *================================================================================================**/
@@ -72,13 +66,6 @@ const profileDescriptionInput = document.querySelector("#profile-description");
 const profileAddButton = document.querySelector("#profile-add-button");
 const addNewCardImageModal = document.querySelector("#add-image-modal");
 const addNewCardModalClose = document.querySelector("#add-image-modal-close");
-
-// const addNewCardTitle = document.querySelector("#card-title-js");
-// const addNewCardImage = document.querySelector("#card-image-js");
-// const newCardTitleInput = document.querySelector("#card-name-input");
-// const newCardImageInput = document.querySelector("#card-image-input");
-
-// const profileEditForm = profileEditModal.querySelector(".modal__form");
 const newCardEditForm =
   addNewCardImageModal.querySelector(".modal__image-card");
 const addCardValidator = new FormValidator(config, newCardEditForm);
@@ -111,9 +98,6 @@ function togglePopup(popup) {
   }
   popup.classList.toggle("modal_opened");
 }
-
-// const cardTemplate =
-//   document.querySelector("#card-template").content.firstElementChild;
 /**----------------------
  * Function for Cards being generated
  *------------------------**/
@@ -180,6 +164,8 @@ newCardEditForm.addEventListener("submit", handleNewCardEditFormSubmit);
 addNewCardModalClose.addEventListener("click", () => {
   togglePopup(addNewCardImageModal);
 });
+
+editProfileFormElement.addEventListener("submit", handleProfileEditSubmit);
 
 imagePopupModalCloseBttn.addEventListener("click", () => {
   togglePopup(imagePopupModal);
