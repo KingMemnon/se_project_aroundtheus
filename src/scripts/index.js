@@ -12,7 +12,6 @@ const config = {
 };
 
 const cardSelector = "#card-template";
-
 const editProfileFormElement = document.querySelector("#edit-profile-modal");
 const editProfileValidator = new FormValidator(config, editProfileFormElement);
 editProfileValidator.enableValidation();
@@ -130,15 +129,15 @@ function handleProfileEditSubmit(e) {
   togglePopup(profileEditModal);
 }
 
-function handleNewCardEditFormSubmit(e) {
-  e.preventDefault();
-  const name = cardTitleInput.value;
-  const link = cardUrlInput.value;
-  const cardElement = getCardElement({ name, link });
-  cardListEl.prepend(cardElement);
-  newCardEditForm.reset();
-  togglePopup(addNewCardImageModal);
-}
+// function handleNewCardEditFormSubmit(e) {
+//   e.preventDefault();
+//   const name = cardTitleInput.value;
+//   const link = cardUrlInput.value;
+//   const cardElement = getCardElement({ name, link });
+//   cardListEl.prepend(cardElement);
+//   newCardEditForm.reset();
+//   togglePopup(addNewCardImageModal);
+// }
 /**================================================================================================
  *                                         EVENT LISTENERS
  *================================================================================================**/
@@ -158,10 +157,10 @@ profileAddButton.addEventListener("click", () => {
   addCardValidator.resetValidation();
 });
 
-newCardEditForm.addEventListener("submit", handleNewCardEditFormSubmit);
-addNewCardModalClose.addEventListener("click", () => {
-  togglePopup(addNewCardImageModal);
-});
+// newCardEditForm.addEventListener("submit", handleNewCardEditFormSubmit);
+// addNewCardModalClose.addEventListener("click", () => {
+//   togglePopup(addNewCardImageModal);
+// });
 
 editProfileFormElement.addEventListener("submit", handleProfileEditSubmit);
 
@@ -191,7 +190,7 @@ modals.forEach((modal) => {
  *               Initialization
  *=============================================**/
 
-initialCards.forEach((cardData) => {
-  const cardElement = getCardElement(cardData);
-  cardListEl.prepend(cardElement);
-});
+// initialCards.forEach((cardData) => {
+//   const cardElement = getCardElement(cardData);
+//   cardListEl.prepend(cardElement);
+// });
