@@ -1,5 +1,6 @@
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
+import Section from "../components/Section.js";
 import "../pages/index.css";
 
 const config = {
@@ -129,15 +130,17 @@ function handleProfileEditSubmit(e) {
   togglePopup(profileEditModal);
 }
 
-// function handleNewCardEditFormSubmit(e) {
-//   e.preventDefault();
-//   const name = cardTitleInput.value;
-//   const link = cardUrlInput.value;
-//   const cardElement = getCardElement({ name, link });
-//   cardListEl.prepend(cardElement);
-//   newCardEditForm.reset();
-//   togglePopup(addNewCardImageModal);
-// }
+function handleNewCardEditFormSubmit(e) {
+  e.preventDefault();
+  const name = cardTitleInput.value;
+  const link = cardUrlInput.value;
+  const cardData = { name, link };
+  const cardElement = getCardElement(cardData);
+  cardSection.addItem(cardElement);
+  newCardEditForm.reset();
+  togglePopup(addNewCardImageModal);
+}
+
 /**================================================================================================
  *                                         EVENT LISTENERS
  *================================================================================================**/
@@ -157,10 +160,16 @@ profileAddButton.addEventListener("click", () => {
   addCardValidator.resetValidation();
 });
 
-// newCardEditForm.addEventListener("submit", handleNewCardEditFormSubmit);
-// addNewCardModalClose.addEventListener("click", () => {
-//   togglePopup(addNewCardImageModal);
-// });
+const cardSection = new Section(
+  {
+    items: initialCards,
+    renderer: (cardData) => {
+      const cardElement = getCardElement(cardData);
+      cardSection.addItem(cardElement);
+    },
+  },
+  ".cards__list"
+);
 
 editProfileFormElement.addEventListener("submit", handleProfileEditSubmit);
 
@@ -189,8 +198,4 @@ modals.forEach((modal) => {
 /**============================================
  *               Initialization
  *=============================================**/
-
-// initialCards.forEach((cardData) => {
-//   const cardElement = getCardElement(cardData);
-//   cardListEl.prepend(cardElement);
-// });
+cardSection.renderItems();
