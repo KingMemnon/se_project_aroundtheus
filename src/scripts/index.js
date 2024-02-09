@@ -1,6 +1,7 @@
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
+import PopupWithForm from "../components/PopupWithForm.js";
 import "../pages/index.css";
 
 const config = {
@@ -123,33 +124,37 @@ function handleImageClick(name, url) {
  *                                         EVENT HANDLERS
  *------------------------------------------------------------------------------------------------**/
 
-function handleProfileEditSubmit(e) {
-  e.preventDefault();
-  profileTitle.textContent = profileTitleInput.value;
-  profileDescription.textContent = profileDescriptionInput.value;
-  togglePopup(profileEditModal);
+// update user profile info with inputValues from PopupWithForm
+
+function handleFormSubmit(formData) {
+  profileTitle.textContent = formData.title;
+  profileDescription.textContent = formData.description;
 }
 
-function handleNewCardEditFormSubmit(e) {
-  e.preventDefault();
-  const name = cardTitleInput.value;
-  const link = cardUrlInput.value;
-  const cardData = { name, link };
-  const cardElement = getCardElement(cardData);
-  cardSection.addItem(cardElement);
-  newCardEditForm.reset();
-  togglePopup(addNewCardImageModal);
-}
+const profileEditPopup = new PopupWithForm(
+  "#profile-edit-modal",
+  handleFormSubmit
+);
+profileEditPopup.open();
+
+// function handleFormSubmit(e) {
+//   e.preventDefault();
+//   const name = cardTitleInput.value;
+//   const link = cardUrlInput.value;
+//   const cardData = { name, link };
+//   const cardElement = getCardElement(cardData);
+//   cardSection.addItem(cardElement);
+//   newCardEditForm.reset();
+//   togglePopup(addNewCardImageModal);
+// }
 
 /**================================================================================================
  *                                         EVENT LISTENERS
  *================================================================================================**/
 
-profileEditButton.addEventListener("click", () => {
-  profileTitleInput.value = profileTitle.innerText;
-  profileDescriptionInput.value = profileDescription.innerText;
-  togglePopup(profileEditModal);
-});
+document
+  .querySelector("#profile-edit-button")
+  .addEventListener("click", () => profileEditPopup.open());
 
 profileEditCloseButton.addEventListener("click", () => {
   togglePopup(profileEditModal);
@@ -171,19 +176,17 @@ const cardSection = new Section(
   ".cards__list"
 );
 
-editProfileFormElement.addEventListener("submit", handleProfileEditSubmit);
-
 imagePopupModalCloseBttn.addEventListener("click", () => {
   togglePopup(imagePopupModal);
 });
 const modals = [profileEditModal, addNewCardImageModal, imagePopupModal];
 
-function closeByEscape(evt) {
-  if (evt.key === "Escape") {
-    const openModal = document.querySelector(".modal_opened");
-    togglePopup(openModal);
-  }
-}
+// function closeByEscape(evt) {
+//   if (evt.key === "Escape") {
+//     const openModal = document.querySelector(".modal_opened");
+//     togglePopup(openModal);
+//   }
+// }
 
 function handleCloseByClick(evt) {
   if (evt.target.classList.contains("modal")) {
