@@ -3,6 +3,7 @@ import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import "../pages/index.css";
+import PopupWithImage from "../components/PopupWithImage.js";
 
 const config = {
   formSelector: "modal__form",
@@ -92,14 +93,6 @@ const imageText = document.querySelector("#image-caption");
  *                                         FUNCTION
  *================================================================================================**/
 
-function togglePopup(popup) {
-  if (popup.classList.contains("modal_opened")) {
-    document.removeEventListener("keydown", closeByEscape);
-  } else {
-    document.addEventListener("keydown", closeByEscape);
-  }
-  popup.classList.toggle("modal_opened");
-}
 /**----------------------
  * Function for Cards being generated
  *------------------------**/
@@ -107,19 +100,18 @@ function getCardElement(cardData) {
   const card = new Card(cardData, cardSelector, handleImageClick);
   return card.getView();
 }
-
 //   /**======================
 //    **      event listener for card images
 //    *========================**/
 /**======================
  **      function to open image modal
  *========================**/
-function handleImageClick(name, url) {
-  imagePopupModalImage.src = url;
-  imagePopupModalImage.alt = `Photo of ${name}`;
-  imageText.textContent = name;
-  togglePopup(imagePopupModal);
-}
+// function handleImageClick(name, url) {
+//   imagePopupModalImage.src = url;
+//   imagePopupModalImage.alt = `Photo of ${name}`;
+//   imageText.textContent = name;
+//   togglePopup(imagePopupModal);
+// }
 /**------------------------------------------------------------------------------------------------
  *                                         EVENT HANDLERS
  *------------------------------------------------------------------------------------------------**/
@@ -135,8 +127,14 @@ const profileEditPopup = new PopupWithForm(
   "#profile-edit-modal",
   handleFormSubmit
 );
-profileEditPopup.open();
 
+const imagePopup = new PopupWithImage("#add-image-modal", (inputVales) => {
+  const cardElement = createCard(inputVales);
+  cardListEl.prepend(cardElement);
+});
+function handleImageClick(name, link) {
+  imagePopup.open({ name, link });
+}
 // function handleFormSubmit(e) {
 //   e.preventDefault();
 //   const name = cardTitleInput.value;
@@ -152,18 +150,18 @@ profileEditPopup.open();
  *                                         EVENT LISTENERS
  *================================================================================================**/
 
+profileEditPopup.setEventListeners();
+
 document
   .querySelector("#profile-edit-button")
   .addEventListener("click", () => profileEditPopup.open());
 
-profileEditCloseButton.addEventListener("click", () => {
-  togglePopup(profileEditModal);
-});
-
+imagePopup.setEventListeners();
 profileAddButton.addEventListener("click", () => {
-  togglePopup(addNewCardImageModal);
-  addCardValidator.resetValidation();
+  imagePopup.open();
 });
+addCardValidator.resetValidation();
+imagePopup.setEventListeners();
 
 const cardSection = new Section(
   {
