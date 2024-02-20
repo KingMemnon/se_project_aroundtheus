@@ -3,6 +3,7 @@ import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import "../pages/index.css";
+import UserInfo from "../components/userInfo.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 
 const config = {
@@ -128,12 +129,29 @@ const profileEditPopup = new PopupWithForm(
   handleFormSubmit
 );
 
-const imagePopup = new PopupWithImage("#add-image-modal", (inputVales) => {
-  const cardElement = createCard(inputVales);
+const userInfo = new UserInfo({
+  userName: "#profile-title-js",
+  userJob: "#profile-description-js",
+  handleFormSubmit,
+});
+
+// function handleFormSubmit(event) {
+//   event.preventDefault();
+//   const name = profileTitleInput.value;
+//   const job = profileDescription.value;
+
+//   userInfo.setUserInfo({ name, job });
+
+//   profileEditPopup.close();
+// }
+
+const addCardPopup = new PopupWithForm("#add-image-modal", (inputValues) => {
+  const cardElement = getCardElement(inputValues);
   cardListEl.prepend(cardElement);
 });
 function handleImageClick(name, link) {
-  imagePopup.open({ name, link });
+  console.log("handleImageClick", name, link);
+  // open PopupWithImage class instance
 }
 // function handleFormSubmit(e) {
 //   e.preventDefault();
@@ -150,18 +168,26 @@ function handleImageClick(name, link) {
  *                                         EVENT LISTENERS
  *================================================================================================**/
 
+profileEditButton.addEventListener("click", () => {
+  const currentUserInfo = userInfo.getUserInfo();
+  profileTitleInput.value = currentUserInfo.name;
+  profileDescriptionInput.value = currentUserInfo.job;
+
+  profileEditPopup.open();
+});
+
 profileEditPopup.setEventListeners();
 
 document
   .querySelector("#profile-edit-button")
   .addEventListener("click", () => profileEditPopup.open());
 
-imagePopup.setEventListeners();
+addCardPopup.setEventListeners();
 profileAddButton.addEventListener("click", () => {
-  imagePopup.open();
+  // imagePopup.open();
+  addCardPopup.open();
 });
 addCardValidator.resetValidation();
-imagePopup.setEventListeners();
 
 const cardSection = new Section(
   {
