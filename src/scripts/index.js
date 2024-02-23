@@ -101,23 +101,9 @@ function getCardElement(cardData) {
   const card = new Card(cardData, cardSelector, handleImageClick);
   return card.getView();
 }
-//   /**======================
-//    **      event listener for card images
-//    *========================**/
-/**======================
- **      function to open image modal
- *========================**/
-// function handleImageClick(name, url) {
-//   imagePopupModalImage.src = url;
-//   imagePopupModalImage.alt = `Photo of ${name}`;
-//   imageText.textContent = name;
-//   togglePopup(imagePopupModal);
-// }
 /**------------------------------------------------------------------------------------------------
  *                                         EVENT HANDLERS
  *------------------------------------------------------------------------------------------------**/
-
-// update user profile info with inputValues from PopupWithForm
 
 function handleFormSubmit(formData) {
   profileTitle.textContent = formData.title;
@@ -135,34 +121,16 @@ const userInfo = new UserInfo({
   handleFormSubmit,
 });
 
-// function handleFormSubmit(event) {
-//   event.preventDefault();
-//   const name = profileTitleInput.value;
-//   const job = profileDescription.value;
-
-//   userInfo.setUserInfo({ name, job });
-
-//   profileEditPopup.close();
-// }
-
 const addCardPopup = new PopupWithForm("#add-image-modal", (inputValues) => {
   const cardElement = getCardElement(inputValues);
   cardListEl.prepend(cardElement);
 });
+
+const imagePopup = new PopupWithImage("#preview-image-modal");
+
 function handleImageClick(name, link) {
-  console.log("handleImageClick", name, link);
-  // open PopupWithImage class instance
+  imagePopup.open({ name, link });
 }
-// function handleFormSubmit(e) {
-//   e.preventDefault();
-//   const name = cardTitleInput.value;
-//   const link = cardUrlInput.value;
-//   const cardData = { name, link };
-//   const cardElement = getCardElement(cardData);
-//   cardSection.addItem(cardElement);
-//   newCardEditForm.reset();
-//   togglePopup(addNewCardImageModal);
-// }
 
 /**================================================================================================
  *                                         EVENT LISTENERS
@@ -184,33 +152,26 @@ document
 
 addCardPopup.setEventListeners();
 profileAddButton.addEventListener("click", () => {
-  // imagePopup.open();
   addCardPopup.open();
 });
+
+imagePopup.setEventListeners();
+
 addCardValidator.resetValidation();
 
 const cardSection = new Section(
   {
     items: initialCards,
     renderer: (cardData) => {
-      const cardElement = getCardElement(cardData);
+      const card = new Card(cardData, cardSelector, handleImageClick);
+      const cardElement = card.getView();
       cardSection.addItem(cardElement);
     },
   },
   ".cards__list"
 );
 
-imagePopupModalCloseBttn.addEventListener("click", () => {
-  togglePopup(imagePopupModal);
-});
 const modals = [profileEditModal, addNewCardImageModal, imagePopupModal];
-
-// function closeByEscape(evt) {
-//   if (evt.key === "Escape") {
-//     const openModal = document.querySelector(".modal_opened");
-//     togglePopup(openModal);
-//   }
-// }
 
 function handleCloseByClick(evt) {
   if (evt.target.classList.contains("modal")) {
