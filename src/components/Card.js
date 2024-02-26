@@ -25,11 +25,10 @@ export default class Card {
   }
 
   _setEventListeners() {
-    //".card_like-button"
     this._likeButtonEl.addEventListener("click", () => {
       this._handleLikeIcon();
     });
-    //".card_delete-button"
+
     this._deleteButtonEl.addEventListener("click", () => {
       this._handleDeleteCard();
     });
@@ -52,6 +51,5 @@ export default class Card {
 
   getView() {
     return this._cardElement;
-    //return the card
   }
 }
