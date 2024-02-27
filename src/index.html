@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Around the U.S.</title>
-    <link href="./pages/index.css" rel="stylesheet" />
+
     <meta
       name="description"
       content="Explore the beautiful scenaries of the United States"
@@ -16,21 +16,20 @@
       content="Around the US, Explorer, Jacques, Cousteau, Yosemite Valley, Lake Louise, Bald Mountains, Latemar, Vanoise, Lago di Braies"
     />
     <link rel="shortcut icon" href="favicon.ico" />
-    <link rel="stylesheet" href="./pages/index.css" />
   </head>
   <body class="page">
     <div class="page__content">
       <header class="header page__section">
         <img
-          src="./images/VectorAround-logo.svg"
-          alt="Around the US logo"
+          src="<%= require('./images/VectorAround-logo.svg')%>"
+          alt="Logo"
           class="header__logo"
         />
       </header>
       <main class="content">
         <section class="profile page__section">
           <img
-            src="./images/jacques-cousteau.png"
+            src="<%= require('./images/jacques-cousteau.png')%>"
             alt="Jacques jacques cousteau"
             class="profile__image"
           />
@@ -58,7 +57,7 @@
         </section>
       </main>
       <footer class="footer page__section">
-        <p class="footer__copyright">© 2023 Around the U.S. - C.Dunbar</p>
+        <p class="footer__copyright">© 2024 Around the U.S. - C.Dunbar</p>
       </footer>
     </div>
     <!-- Edit Modal --->
@@ -117,7 +116,7 @@
             <input
               class="modal__input"
               type="text"
-              name="title"
+              name="name"
               placeholder="Title"
               id="card-name-input"
               minlength="1"
@@ -130,7 +129,7 @@
             <input
               class="modal__input"
               type="url"
-              name="url"
+              name="link"
               id="card-image-input"
               placeholder="Image link"
               required
@@ -180,6 +179,5 @@
         </div>
       </li>
     </template>
-    <script src="./pages/index.js" defer type="module"></script>
   </body>
 </html>

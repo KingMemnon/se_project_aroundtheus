@@ -5,6 +5,9 @@ export default class Card {
     this._cardSelector = cardSelector;
     this._handleImageClick = handleImageClick;
 
+    console.log("name", name);
+    console.log("link", link);
+
     this._cardElement = document
       .querySelector(this._cardSelector)
       .content.querySelector(".card")
@@ -22,16 +25,17 @@ export default class Card {
   }
 
   _setEventListeners() {
-    //".card_like-button"
     this._likeButtonEl.addEventListener("click", () => {
       this._handleLikeIcon();
     });
-    //".card_delete-button"
+
     this._deleteButtonEl.addEventListener("click", () => {
       this._handleDeleteCard();
     });
 
     this._cardImageEl.addEventListener("click", () => {
+      console.log("this._name", this._name);
+      console.log("this._link", this._link);
       this._handleImageClick(this._name, this._link);
     });
   }
@@ -47,6 +51,5 @@ export default class Card {
 
   getView() {
     return this._cardElement;
-    //return the card
   }
 }
