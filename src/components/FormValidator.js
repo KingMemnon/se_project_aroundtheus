@@ -12,8 +12,6 @@ export default class FormValidator {
     this._submitButton = formElement.querySelector(this._submitButtonSelector);
   }
 
-  //escape and overlay
-
   _showInputError(inputElement) {
     const errorMessageEl = this._formElement.querySelector(
       `#${inputElement.id}-error`
@@ -45,8 +43,7 @@ export default class FormValidator {
       (inputElement) => !inputElement.validity.valid
     );
   }
-  //disableButton
-  //enableButton
+
   _toggleButtonState() {
     if (this._hasInvalidInput()) {
       this._submitButton.classList.add(this._inactiveButtonClass);
@@ -57,7 +54,6 @@ export default class FormValidator {
     }
   }
 
-  //Event Listeners
   _setEventListeners() {
     this._inputElements.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
