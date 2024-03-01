@@ -88,12 +88,11 @@ document
 
 addCardPopup.setEventListeners();
 profileAddButton.addEventListener("click", () => {
+  addCardValidator.resetValidation();
   addCardPopup.open();
 });
 
 imagePopup.setEventListeners();
-
-addCardValidator.resetValidation();
 
 const cardSection = new Section(
   {
@@ -108,16 +107,6 @@ const cardSection = new Section(
 );
 
 const modals = [profileEditModal, addNewCardImageModal, imagePopupModal];
-
-function handleCloseByClick(evt) {
-  if (evt.target.classList.contains("modal")) {
-    togglePopup(evt.target);
-  }
-}
-
-modals.forEach((modal) => {
-  modal.addEventListener("click", handleCloseByClick);
-});
 
 /**============================================
  *               Initialization
