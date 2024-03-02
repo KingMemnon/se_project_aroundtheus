@@ -4,23 +4,19 @@ import {
   cardSelector,
   editProfileFormElement,
   profileEditButton,
-  profileEditModal,
   profileTitle,
   profileDescription,
   profileTitleInput,
   profileDescriptionInput,
   profileAddButton,
-  addNewCardImageModal,
-  newCardEditForm,
-  cardListEl,
-  imagePopupModal,
+  newCardEditForm
 } from "../utils/constants.js";
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import "../pages/index.css";
-import UserInfo from "../components/userInfo.js";
+import UserInfo from "../components/UserInfo.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 
 const editProfileValidator = new FormValidator(config, editProfileFormElement);
@@ -49,17 +45,18 @@ function handleFormSubmit(formData) {
 const profileEditPopup = new PopupWithForm(
   "#profile-edit-modal",
   handleFormSubmit
+  profileEditPopup.close()
 );
 
 const userInfo = new UserInfo({
   userName: "#profile-title-js",
   userJob: "#profile-description-js",
-  handleFormSubmit,
 });
 
 const addCardPopup = new PopupWithForm("#add-image-modal", (inputValues) => {
   const cardElement = getCardElement(inputValues);
-  cardListEl.prepend(cardElement);
+  cardSection.addItem(cardElement);
+  addCardPopup.close();
 });
 
 const imagePopup = new PopupWithImage("#preview-image-modal");
@@ -76,15 +73,8 @@ profileEditButton.addEventListener("click", () => {
   const currentUserInfo = userInfo.getUserInfo();
   profileTitleInput.value = currentUserInfo.name;
   profileDescriptionInput.value = currentUserInfo.job;
-
   profileEditPopup.open();
 });
-
-profileEditPopup.setEventListeners();
-
-document
-  .querySelector("#profile-edit-button")
-  .addEventListener("click", () => profileEditPopup.open());
 
 addCardPopup.setEventListeners();
 profileAddButton.addEventListener("click", () => {
@@ -105,8 +95,6 @@ const cardSection = new Section(
   },
   ".cards__list"
 );
-
-const modals = [profileEditModal, addNewCardImageModal, imagePopupModal];
 
 /**============================================
  *               Initialization
