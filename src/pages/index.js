@@ -9,7 +9,7 @@ import {
   profileTitleInput,
   profileDescriptionInput,
   profileAddButton,
-  newCardEditForm
+  newCardEditForm,
 } from "../utils/constants.js";
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
@@ -37,15 +37,14 @@ function getCardElement(cardData) {
  *                                         EVENT HANDLERS
  *------------------------------------------------------------------------------------------------**/
 
-function handleFormSubmit(formData) {
-  profileTitle.textContent = formData.title;
-  profileDescription.textContent = formData.description;
+function handleProfileFormSubmit(formData) {
+  userInfo.setUserInfo({ name: formData.title, job: formData.description });
+  profileEditPopup.close();
 }
 
 const profileEditPopup = new PopupWithForm(
   "#profile-edit-modal",
-  handleFormSubmit
-  profileEditPopup.close()
+  handleProfileFormSubmit
 );
 
 const userInfo = new UserInfo({
@@ -88,8 +87,7 @@ const cardSection = new Section(
   {
     items: initialCards,
     renderer: (cardData) => {
-      const card = new Card(cardData, cardSelector, handleImageClick);
-      const cardElement = card.getView();
+      const cardElement = getCardElement(cardData);
       cardSection.addItem(cardElement);
     },
   },
