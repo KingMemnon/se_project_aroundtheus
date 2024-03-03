@@ -83,6 +83,8 @@ profileAddButton.addEventListener("click", () => {
 
 imagePopup.setEventListeners();
 
+profileEditPopup.setEventListeners();
+
 const cardSection = new Section(
   {
     items: initialCards,
