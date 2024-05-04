@@ -4,8 +4,6 @@ import {
   cardSelector,
   editProfileFormElement,
   profileEditButton,
-  profileTitle,
-  profileDescription,
   profileTitleInput,
   profileDescriptionInput,
   profileAddButton,
