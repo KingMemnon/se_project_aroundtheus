@@ -30,7 +30,7 @@ export default class Api {
     return fetch(`${this._baseUrl}/cards`, {
       method: "POST",
       headers: {
-        ...this._headers,
+        this._headers,
         "Content-Type": "application/json",
       },
       body: JSON.stringify(cardData),
