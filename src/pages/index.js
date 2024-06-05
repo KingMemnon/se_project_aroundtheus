@@ -10,6 +10,7 @@ import {
   newCardEditForm,
 } from "../utils/constants.js";
 import Card from "../components/Card.js";
+import Api from "../components/Api.js";
 import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
 import PopupWithForm from "../components/PopupWithForm.js";
@@ -22,6 +23,24 @@ editProfileValidator.enableValidation();
 
 const addCardValidator = new FormValidator(config, newCardEditForm);
 addCardValidator.enableValidation();
+
+const api = new Api({
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  headers: {
+    authorization: "eeca6a67-c0e1-4af7-ac48-d61d2e5d5520",
+    "Content-Type": "application/json",
+  },
+});
+
+api.getInitialCards().then((cards) => {
+  console.log(cards);
+  // loop through card data and create cards via the card class
+});
+
+api.getUserInfo().then((userData) => {
+  console.log(userData);
+  // use the UserInfo class to update the user data
+});
 
 /**================================================================================================
  *                                         FUNCTION
