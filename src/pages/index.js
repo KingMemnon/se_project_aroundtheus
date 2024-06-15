@@ -8,6 +8,7 @@ import {
   profileDescriptionInput,
   profileAddButton,
   newCardEditForm,
+  cardListEl,
 } from "../utils/constants.js";
 import Card from "../components/Card.js";
 import Api from "../components/Api.js";
@@ -34,12 +35,18 @@ const api = new Api({
 
 api.getInitialCards().then((cards) => {
   console.log(cards);
-  // loop through card data and create cards via the card class
+  cards.forEach((cardData) => {
+    const cardElement = getCardElement(cardData);
+    cardListEl.append(cardElement);
+  });
 });
 
 api.getUserInfo().then((userData) => {
   console.log(userData);
-  // use the UserInfo class to update the user data
+  userInfo.setUserInfo({
+    name: userData.name,
+    job: userData.about,
+  });
 });
 
 /**================================================================================================
@@ -54,25 +61,32 @@ function getCardElement(cardData) {
  *                                         EVENT HANDLERS
  *------------------------------------------------------------------------------------------------**/
 
-function handleProfileFormSubmit(formData) {
-  userInfo.setUserInfo({ name: formData.title, job: formData.description });
-  profileEditPopup.close();
-}
+// function handleProfileFormSubmit(formData) {
+//   userInfo.setUserInfo({ name: formData.title, job: formData.description });
+//   profileEditPopup.close();
+// }
 
-const profileEditPopup = new PopupWithForm(
-  "#profile-edit-modal",
-  handleProfileFormSubmit
-);
+const profileEditPopup = new PopupWithForm("profile-edit-modal", (formData) => {
+  api.setUserInfo(formData).then(() => {
+    userInfo.setUserInfo({ name: formData.title, job: formData.descirption });
+    profileEditPopup.close();
+  });
+});
+// const profileEditPopup = new PopupWithForm(
+//   "#profile-edit-modal",
+//  handleProfileFormSubmit
+// );
 
 const userInfo = new UserInfo({
   userName: "#profile-title-js",
   userJob: "#profile-description-js",
 });
-
-const addCardPopup = new PopupWithForm("#add-image-modal", (inputValues) => {
-  const cardElement = getCardElement(inputValues);
-  cardSection.addItem(cardElement);
-  addCardPopup.close();
+const addCardPopup = new PopupWithForm("add-image-modal", (inputValues) => {
+  api.addCard(inputValues).then((cardData) => {
+    const cardElement = getCardElement(cardData);
+    cardSection.addItem(cardElement);
+    addCardPopup.close();
+  });
 });
 
 const imagePopup = new PopupWithImage("#preview-image-modal");
