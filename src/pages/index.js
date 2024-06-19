@@ -40,7 +40,10 @@ api.getInitialCards().then((cards) => {
     cardListEl.append(cardElement);
   });
 });
-
+const userInfo = new UserInfo({
+  userName: "#profile-title-js",
+  userJob: "#profile-description-js",
+});
 api.getUserInfo().then((userData) => {
   console.log(userData);
   userInfo.setUserInfo({
@@ -66,21 +69,20 @@ function getCardElement(cardData) {
 //   profileEditPopup.close();
 // }
 
-const profileEditPopup = new PopupWithForm("profile-edit-modal", (formData) => {
-  api.setUserInfo(formData).then(() => {
-    userInfo.setUserInfo({ name: formData.title, job: formData.descirption });
-    profileEditPopup.close();
-  });
-});
+const profileEditPopup = new PopupWithForm(
+  "#profile-edit-modal",
+  (formData) => {
+    api.setUserInfo(formData).then(() => {
+      userInfo.setUserInfo({ name: formData.title, job: formData.descirption });
+      profileEditPopup.close();
+    });
+  }
+);
 // const profileEditPopup = new PopupWithForm(
 //   "#profile-edit-modal",
 //  handleProfileFormSubmit
 // );
 
-const userInfo = new UserInfo({
-  userName: "#profile-title-js",
-  userJob: "#profile-description-js",
-});
 const addCardPopup = new PopupWithForm("add-image-modal", (inputValues) => {
   api.addCard(inputValues).then((cardData) => {
     const cardElement = getCardElement(cardData);
