@@ -57,6 +57,12 @@ export const profileTitleInput = document.querySelector("#profile-name");
 export const profileDescriptionInput = document.querySelector(
   "#profile-description"
 );
+export const avatarModal = document.querySelector("#avatar-modal");
+export const avatarForm = document.querySelector("#avatar-form");
+export const avatarUrlInput = document.querySelector("#avatar-url");
+export const changeAvatarImageButton = document.querySelector(
+  "#change-avatar-image"
+);
 /*================================ Add New Card ==============================*/
 export const profileAddButton = document.querySelector("#profile-add-button");
 export const addNewCardImageModal = document.querySelector("#add-image-modal");

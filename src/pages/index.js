@@ -8,6 +8,10 @@ import {
   profileDescriptionInput,
   profileAddButton,
   newCardEditForm,
+  avatarModal,
+  avatarForm,
+  avatarUrlInput,
+  changeAvatarImageButton,
   cardListEl,
 } from "../utils/constants.js";
 import Card from "../components/Card.js";
@@ -19,11 +23,20 @@ import "../pages/index.css";
 import UserInfo from "../components/UserInfo.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 
+// 1. Add new modal for avatar edit-checkmark
+// 2. Create FormValidator instance for that form
+// 3. Create PopupWithForm instance for the avatar edit modal
+// 4.  Create new method in Api.js called updateAvatar and call it in the submit handler
+// 5.  After you call the Api, update the avatar image UI
+
 const editProfileValidator = new FormValidator(config, editProfileFormElement);
 editProfileValidator.enableValidation();
 
 const addCardValidator = new FormValidator(config, newCardEditForm);
 addCardValidator.enableValidation();
+
+const avatarFormValidator = new FormValidator(config, avatarForm);
+avatarFormValidator.enableValidation();
 
 const api = new Api({
   baseUrl: "https://around-api.en.tripleten-services.com/v1",
@@ -33,23 +46,28 @@ const api = new Api({
   },
 });
 
+let cardSection;
+
 api.getInitialCards().then((cards) => {
-  console.log(cards);
-  cards.forEach((cardData) => {
-    const cardElement = getCardElement(cardData);
-    cardListEl.append(cardElement);
-  });
+  cardSection = new Section(
+    {
+      items: cards,
+      renderer: (cardData) => {
+        const cardElement = getCardElement(cardData);
+        cardSection.addItem(cardElement);
+      },
+    },
+    ".cards__list"
+  );
+  cardSection.renderItems();
 });
 const userInfo = new UserInfo({
   userName: "#profile-title-js",
-  userJob: "#profile-description-js",
+  userAbout: "#profile-description-js",
 });
 api.getUserInfo().then((userData) => {
   console.log(userData);
-  userInfo.setUserInfo({
-    name: userData.name,
-    job: userData.about,
-  });
+  userInfo.setUserInfo(userData);
 });
 
 /**================================================================================================
@@ -72,8 +90,8 @@ function getCardElement(cardData) {
 const profileEditPopup = new PopupWithForm(
   "#profile-edit-modal",
   (formData) => {
-    api.setUserInfo(formData).then(() => {
-      userInfo.setUserInfo({ name: formData.title, job: formData.descirption });
+    api.setUserInfo(formData).then((userData) => {
+      userInfo.setUserInfo(userData); // { name: '', about: ''}
       profileEditPopup.close();
     });
   }
@@ -83,11 +101,18 @@ const profileEditPopup = new PopupWithForm(
 //  handleProfileFormSubmit
 // );
 
-const addCardPopup = new PopupWithForm("add-image-modal", (inputValues) => {
+const addCardPopup = new PopupWithForm("#add-image-modal", (inputValues) => {
   api.addCard(inputValues).then((cardData) => {
     const cardElement = getCardElement(cardData);
     cardSection.addItem(cardElement);
     addCardPopup.close();
+  });
+});
+
+const avatarModalPopup = new PopupWithForm("#avatar-modal", (formData) => {
+  api.setUserInfo(formData.avatar).then((userData) => {
+    userInfo.setUserInfo({ avatar: userData.avatar });
+    avatarModalPopup.close();
   });
 });
 
@@ -104,7 +129,7 @@ function handleImageClick(name, link) {
 profileEditButton.addEventListener("click", () => {
   const currentUserInfo = userInfo.getUserInfo();
   profileTitleInput.value = currentUserInfo.name;
-  profileDescriptionInput.value = currentUserInfo.job;
+  profileDescriptionInput.value = currentUserInfo.about;
   profileEditPopup.open();
 });
 
@@ -114,22 +139,15 @@ profileAddButton.addEventListener("click", () => {
   addCardPopup.open();
 });
 
+changeAvatarImageButton.addEventListener("click", () => {
+  avatarFormValidator.resetValidation();
+  addModalPopup.open();
+});
+
 imagePopup.setEventListeners();
 
 profileEditPopup.setEventListeners();
 
-const cardSection = new Section(
-  {
-    items: initialCards,
-    renderer: (cardData) => {
-      const cardElement = getCardElement(cardData);
-      cardSection.addItem(cardElement);
-    },
-  },
-  ".cards__list"
-);
-
 /**============================================
  *               Initialization
  *=============================================**/
-cardSection.renderItems();
