@@ -23,9 +23,9 @@ import "../pages/index.css";
 import UserInfo from "../components/UserInfo.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 
-// 1. Add new modal for avatar edit-checkmark
-// 2. Create FormValidator instance for that form
-// 3. Create PopupWithForm instance for the avatar edit modal
+// 1. Add new modal for avatar edit-checkmark**
+// 2. Create FormValidator instance for that form**
+// 3. Create PopupWithForm instance for the avatar edit modal**
 // 4.  Create new method in Api.js called updateAvatar and call it in the submit handler
 // 5.  After you call the Api, update the avatar image UI
 
