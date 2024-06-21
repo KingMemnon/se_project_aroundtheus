@@ -1,5 +1,4 @@
 import {
-  initialCards,
   config,
   cardSelector,
   editProfileFormElement,
@@ -110,7 +109,7 @@ const addCardPopup = new PopupWithForm("#add-image-modal", (inputValues) => {
 });
 
 const avatarModalPopup = new PopupWithForm("#avatar-modal", (formData) => {
-  api.setUserInfo(formData.avatar).then((userData) => {
+  api.setUserAvatar(formData.avatar).then((userData) => {
     userInfo.setUserInfo({ avatar: userData.avatar });
     avatarModalPopup.close();
   });
@@ -141,12 +140,12 @@ profileAddButton.addEventListener("click", () => {
 
 changeAvatarImageButton.addEventListener("click", () => {
   avatarFormValidator.resetValidation();
-  addModalPopup.open();
+  avatarModalPopup.open();
 });
 
 imagePopup.setEventListeners();
-
 profileEditPopup.setEventListeners();
+avatarModalPopup.setEventListeners();
 
 /**============================================
  *               Initialization
