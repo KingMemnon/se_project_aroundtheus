@@ -1,3 +1,5 @@
+import { avatarModal, avatarUrlInput } from "../utils/constants";
+
 export default class Api {
   constructor({ baseUrl, headers }) {
     this._baseUrl = baseUrl;
@@ -65,6 +67,18 @@ export default class Api {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({ avatar }),
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+    });
+  }
+
+  updateAvatar(avatarURL) {
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({ avatar: avatarURL }),
     }).then((res) => {
       if (res.ok) {
         return res.json();

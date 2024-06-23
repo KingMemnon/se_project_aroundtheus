@@ -28,11 +28,18 @@
       </header>
       <main class="content">
         <section class="profile page__section">
-          <img
-            src="<%= require('./images/jacques-cousteau.png')%>"
-            alt="Jacques jacques cousteau"
-            class="profile__image"
-          />
+          <div class="profile__container">
+            <img
+              src="<%= require('./images/jacques-cousteau.png')%>"
+              alt="Jacques jacques cousteau"
+              class="profile__image"
+            />
+            <button
+              class="profile__edit-image"
+              type="button"
+              id="change-avatar-image"
+            ></button>
+          </div>
           <div class="profile__info">
             <h1 class="profile__title" id="profile-title-js">
               Jacques Cousteau

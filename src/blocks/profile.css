@@ -69,21 +69,47 @@
   margin: 0;
 }
 
+.profile__container {
+  cursor: pointer;
+  position: relative;
+  margin-right: 24px;
+  border-radius: 50%;
+}
+
+.profile__container:hover .profile__image {
+  opacity: 0.5;
+}
+
+.profile__container:hover .profile__edit-image {
+  visibility: visible;
+}
+
 .profile__image {
   height: 120px;
   width: 120px;
   border-radius: 50%;
   object-fit: cover;
   background-position: center;
-  margin-right: 24px;
 }
 
-.profile__image:hover {
+.profile__edit-image {
+  all: unset;
+  position: absolute;
+  background: transparent url(../images/Vectoreditpen.svg) center no-repeat;
+  opacity: 0.5;
+  top: 0;
+  left: 0;
+  width: 120px;
+  height: 120px;
+  visibility: hidden;
+}
+
+/* .profile__image:hover {
   position: absolute;
   background: transparent url(../images/Vectoreditpen.svg) center no-repeat;
   opacity: 0.5;
   cursor: pointer;
-}
+} */
 
 @media screen and (max-width: 900px) {
   .profile {

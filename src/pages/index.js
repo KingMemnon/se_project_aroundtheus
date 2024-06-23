@@ -63,6 +63,7 @@ api.getInitialCards().then((cards) => {
 const userInfo = new UserInfo({
   userName: "#profile-title-js",
   userAbout: "#profile-description-js",
+  userAvatar: ".profile__image",
 });
 api.getUserInfo().then((userData) => {
   console.log(userData);
@@ -142,6 +143,11 @@ changeAvatarImageButton.addEventListener("click", () => {
   avatarFormValidator.resetValidation();
   avatarModalPopup.open();
 });
+
+// avatarUrlInput.addEventListener("input", () => {
+//   avatarFormValidator.checkInputValidity(avatarUrlInput);
+//   avatarFormValidator.toggleButtonState();
+// });
 
 imagePopup.setEventListeners();
 profileEditPopup.setEventListeners();
