@@ -4,6 +4,7 @@ export default class Card {
     this._link = link;
     this._cardSelector = cardSelector;
     this._handleImageClick = handleImageClick;
+    this._handleCardDelete = handleCardDelete;
 
     console.log("name", name);
     console.log("link", link);
@@ -30,7 +31,7 @@ export default class Card {
     });
 
     this._deleteButtonEl.addEventListener("click", () => {
-      this._handleDeleteCard();
+      this._handleCardDelete(this._id);
     });
 
     this._cardImageEl.addEventListener("click", () => {

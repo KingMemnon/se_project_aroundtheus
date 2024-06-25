@@ -7,10 +7,10 @@ import {
   profileDescriptionInput,
   profileAddButton,
   newCardEditForm,
-  avatarModal,
   avatarForm,
-  avatarUrlInput,
   changeAvatarImageButton,
+  removeCardForm,
+  removeCardModal,
   cardListEl,
 } from "../utils/constants.js";
 import Card from "../components/Card.js";
@@ -22,11 +22,16 @@ import "../pages/index.css";
 import UserInfo from "../components/UserInfo.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 
-// 1. Add new modal for avatar edit-checkmark**
-// 2. Create FormValidator instance for that form**
-// 3. Create PopupWithForm instance for the avatar edit modal**
-// 4.  Create new method in Api.js called updateAvatar and call it in the submit handler
-// 5.  After you call the Api, update the avatar image UI
+// 1. Add new modal for avatar edit-checkmark✓✓
+// 2. Create FormValidator instance for that form✓✓
+// 3. Create PopupWithForm instance for the avatar edit modal✓✓
+// 4.  Create new method in Api.js called updateAvatar and call it in the submit handler✓✓
+// 5.  After you call the Api, update the avatar image UI✓✓
+//6 Add the event listener to the avatar edit button✓✓
+//7. Add the event listener to the avatarUrlInput✓✓
+//8. Add the event listener for Remove Card Modal
+//9. Add and Removing Likes
+//10. improving UX of all forms
 
 const editProfileValidator = new FormValidator(config, editProfileFormElement);
 editProfileValidator.enableValidation();
@@ -36,6 +41,9 @@ addCardValidator.enableValidation();
 
 const avatarFormValidator = new FormValidator(config, avatarForm);
 avatarFormValidator.enableValidation();
+
+const removeCardValidator = new FormValidator(config, removeCardForm);
+removeCardValidator.enableValidation();
 
 const api = new Api({
   baseUrl: "https://around-api.en.tripleten-services.com/v1",
@@ -66,7 +74,6 @@ const userInfo = new UserInfo({
   userAvatar: ".profile__image",
 });
 api.getUserInfo().then((userData) => {
-  console.log(userData);
   userInfo.setUserInfo(userData);
 });
 
@@ -75,7 +82,12 @@ api.getUserInfo().then((userData) => {
  *================================================================================================**/
 
 function getCardElement(cardData) {
-  const card = new Card(cardData, cardSelector, handleImageClick);
+  const card = new Card(
+    cardData,
+    cardSelector,
+    handleImageClick,
+    handleCardDelete
+  );
   return card.getView();
 }
 /**------------------------------------------------------------------------------------------------
@@ -109,11 +121,28 @@ const addCardPopup = new PopupWithForm("#add-image-modal", (inputValues) => {
   });
 });
 
+// const removeCardModal = new PopupWithForm("#remove-card-modal", (cardId) => {
+//   api.deleteCard(cardId).then(() => {
+//     document.querySelector(`[data-card-id="${cardId}"]`).remove();
+//     removeCardModal.close();
+//   });
+// });
+
+const handleCardDelete = (cardId) => {
+  removeCardModal.open(cardId);
+};
+
 const avatarModalPopup = new PopupWithForm("#avatar-modal", (formData) => {
-  api.setUserAvatar(formData.avatar).then((userData) => {
-    userInfo.setUserInfo({ avatar: userData.avatar });
-    avatarModalPopup.close();
-  });
+  const avatarUrl = formData["avatar-form"];
+  api
+    .setUserAvatar(avatarUrl)
+    .then((userData) => {
+      userInfo.setUserInfo({ avatar: userData.avatar });
+      avatarModalPopup.close();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 });
 
 const imagePopup = new PopupWithImage("#preview-image-modal");
@@ -121,6 +150,16 @@ const imagePopup = new PopupWithImage("#preview-image-modal");
 function handleImageClick(name, link) {
   imagePopup.open({ name, link });
 }
+
+// function getCardElement(cardData) {
+//   const card = new Card(
+//     cardData,
+//     cardSelector,
+//     handleImageClick,
+//     handleCardDelete
+//   );
+//   return card.getView();
+// }
 
 /**================================================================================================
  *                                         EVENT LISTENERS
@@ -134,6 +173,7 @@ profileEditButton.addEventListener("click", () => {
 });
 
 addCardPopup.setEventListeners();
+
 profileAddButton.addEventListener("click", () => {
   addCardValidator.resetValidation();
   addCardPopup.open();

@@ -23,6 +23,11 @@ export default class PopupWithForm extends Popup {
     });
   }
 
+  open(cardId) {
+    this._cardId = cardId;
+    super.open();
+  }
+
   close() {
     this._modalForm.reset();
     super.close();

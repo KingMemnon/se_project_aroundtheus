@@ -40,6 +40,11 @@ export const newCardEditForm =
 
 export const cardListEl = document.querySelector(".cards__list");
 
+/*<!--================= Remove Card Modal ================-->*/
+
+export const removeCardModal = document.querySelector("#remove-card-modal");
+export const removeCardForm = removeCardModal.querySelector(".modal__form");
+
 /**========================================================================
  *                           Image Popup
  *========================================================================**/

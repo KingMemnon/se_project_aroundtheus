@@ -40,6 +40,17 @@ export default class Api {
     });
   }
 
+  deleteCard(cardId) {
+    return fetch(`${this._baseUrl}/cards/${cardId}`, {
+      method: "DELETE",
+      headers: this._headers,
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+    });
+  }
+
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers,
@@ -71,6 +82,7 @@ export default class Api {
       if (res.ok) {
         return res.json();
       }
+      return Promise.reject(`Error: ${res.status}`);
     });
   }
 
