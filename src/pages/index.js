@@ -86,7 +86,8 @@ function getCardElement(cardData) {
     cardData,
     cardSelector,
     handleImageClick,
-    handleCardDelete
+    handleCardDelete,
+    handleLikeClick
   );
   return card.getView();
 }
@@ -102,8 +103,10 @@ function getCardElement(cardData) {
 const profileEditPopup = new PopupWithForm(
   "#profile-edit-modal",
   (formData) => {
+    profileEditPopup.renderLoading(true);
     api.setUserInfo(formData).then((userData) => {
       userInfo.setUserInfo(userData); // { name: '', about: ''}
+      profileEditPopup.renderLoading(false);
       profileEditPopup.close();
     });
   }
@@ -114,30 +117,39 @@ const profileEditPopup = new PopupWithForm(
 // );
 
 const addCardPopup = new PopupWithForm("#add-image-modal", (inputValues) => {
+  addCardPopup.renderLoading(true);
   api.addCard(inputValues).then((cardData) => {
     const cardElement = getCardElement(cardData);
     cardSection.addItem(cardElement);
     addCardPopup.close();
+    addCardPopup.renderLoading(false);
   });
 });
 
-// const removeCardModal = new PopupWithForm("#remove-card-modal", (cardId) => {
-//   api.deleteCard(cardId).then(() => {
-//     document.querySelector(`[data-card-id="${cardId}"]`).remove();
-//     removeCardModal.close();
-//   });
-// });
+const deleteCardModal = new PopupWithForm("#remove-card-modal");
+deleteCardModal.setEventListeners();
 
-const handleCardDelete = (cardId) => {
-  removeCardModal.open(cardId);
-};
-
+function handleCardDelete(card) {
+  deleteCardModal.open();
+  deleteCardModal.setSubmitAction(() => {
+    // this code won't run until user clicks 'yes' to confirm
+    // call api here and pass cardId
+    deleteCardModal.renderLoading(true);
+    api.deleteCard(card.id).then(() => {
+      //document.querySelector(`[data-id="${cardId}"]`).remove();
+      card.deleteCard();
+      deleteCardModal.close();
+    });
+  });
+}
 const avatarModalPopup = new PopupWithForm("#avatar-modal", (formData) => {
   const avatarUrl = formData["avatar-form"];
+  avatarModalPopup.renderLoading(true);
   api
     .setUserAvatar(avatarUrl)
     .then((userData) => {
       userInfo.setUserInfo({ avatar: userData.avatar });
+      avatarModalPopup.renderLoading(false);
       avatarModalPopup.close();
     })
     .catch((err) => {
@@ -151,6 +163,11 @@ function handleImageClick(name, link) {
   imagePopup.open({ name, link });
 }
 
+function handleLikeClick(card) {
+  api.setCardLikes(card.id, card.isLiked).then((newCardData) => {
+    card.updateLikes(newCardData.isLiked);
+  });
+}
 // function getCardElement(cardData) {
 //   const card = new Card(
 //     cardData,
