@@ -104,13 +104,6 @@
   visibility: hidden;
 }
 
-/* .profile__image:hover {
-  position: absolute;
-  background: transparent url(../images/Vectoreditpen.svg) center no-repeat;
-  opacity: 0.5;
-  cursor: pointer;
-} */
-
 @media screen and (max-width: 900px) {
   .profile {
     background-color: black;

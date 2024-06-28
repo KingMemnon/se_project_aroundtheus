@@ -7,7 +7,6 @@ export default class Api {
   }
 
   getInitialCards() {
-    // replace beginning of url with this._baseUrl
     return fetch(`${this._baseUrl}/cards`, {
       headers: this._headers,
     }).then((res) => {
@@ -16,17 +15,6 @@ export default class Api {
       }
     });
   }
-
-  // replace headers with this._headers value
-  //       headers: {
-  //         authorization: "c56e30dc-2883-4270-a59e-b2f7bae969c6",
-  //       },
-  //     }).then((res) => {
-  //       if (res.ok) {
-  //         return res.json();
-  //       }
-  //     });
-  //   }
 
   addCard(cardData) {
     return fetch(`${this._baseUrl}/cards`, {
@@ -108,6 +96,4 @@ export default class Api {
       }
     });
   }
-
-  // other methods for working with the API
 }
