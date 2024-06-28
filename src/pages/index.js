@@ -10,8 +10,6 @@ import {
   avatarForm,
   changeAvatarImageButton,
   removeCardForm,
-  removeCardModal,
-  cardListEl,
 } from "../utils/constants.js";
 import Card from "../components/Card.js";
 import Api from "../components/Api.js";
@@ -21,17 +19,6 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import "../pages/index.css";
 import UserInfo from "../components/UserInfo.js";
 import PopupWithImage from "../components/PopupWithImage.js";
-
-// 1. Add new modal for avatar edit-checkmark✓✓
-// 2. Create FormValidator instance for that form✓✓
-// 3. Create PopupWithForm instance for the avatar edit modal✓✓
-// 4.  Create new method in Api.js called updateAvatar and call it in the submit handler✓✓
-// 5.  After you call the Api, update the avatar image UI✓✓
-//6 Add the event listener to the avatar edit button✓✓
-//7. Add the event listener to the avatarUrlInput✓✓
-//8. Add the event listener for Remove Card Modal
-//9. Add and Removing Likes
-//10. improving UX of all forms
 
 const editProfileValidator = new FormValidator(config, editProfileFormElement);
 editProfileValidator.enableValidation();
@@ -95,26 +82,17 @@ function getCardElement(cardData) {
  *                                         EVENT HANDLERS
  *------------------------------------------------------------------------------------------------**/
 
-// function handleProfileFormSubmit(formData) {
-//   userInfo.setUserInfo({ name: formData.title, job: formData.description });
-//   profileEditPopup.close();
-// }
-
 const profileEditPopup = new PopupWithForm(
   "#profile-edit-modal",
   (formData) => {
     profileEditPopup.renderLoading(true);
     api.setUserInfo(formData).then((userData) => {
-      userInfo.setUserInfo(userData); // { name: '', about: ''}
+      userInfo.setUserInfo(userData);
       profileEditPopup.renderLoading(false);
       profileEditPopup.close();
     });
   }
 );
-// const profileEditPopup = new PopupWithForm(
-//   "#profile-edit-modal",
-//  handleProfileFormSubmit
-// );
 
 const addCardPopup = new PopupWithForm("#add-image-modal", (inputValues) => {
   addCardPopup.renderLoading(true);
@@ -132,11 +110,8 @@ deleteCardModal.setEventListeners();
 function handleCardDelete(card) {
   deleteCardModal.open();
   deleteCardModal.setSubmitAction(() => {
-    // this code won't run until user clicks 'yes' to confirm
-    // call api here and pass cardId
     deleteCardModal.renderLoading(true);
     api.deleteCard(card.id).then(() => {
-      //document.querySelector(`[data-id="${cardId}"]`).remove();
       card.deleteCard();
       deleteCardModal.close();
     });
@@ -168,15 +143,6 @@ function handleLikeClick(card) {
     card.updateLikes(newCardData.isLiked);
   });
 }
-// function getCardElement(cardData) {
-//   const card = new Card(
-//     cardData,
-//     cardSelector,
-//     handleImageClick,
-//     handleCardDelete
-//   );
-//   return card.getView();
-// }
 
 /**================================================================================================
  *                                         EVENT LISTENERS
@@ -200,11 +166,6 @@ changeAvatarImageButton.addEventListener("click", () => {
   avatarFormValidator.resetValidation();
   avatarModalPopup.open();
 });
-
-// avatarUrlInput.addEventListener("input", () => {
-//   avatarFormValidator.checkInputValidity(avatarUrlInput);
-//   avatarFormValidator.toggleButtonState();
-// });
 
 imagePopup.setEventListeners();
 profileEditPopup.setEventListeners();
