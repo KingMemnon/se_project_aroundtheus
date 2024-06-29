@@ -23,6 +23,3 @@ HTML, and CSS were used in creating this responsive website with the use of grid
 - [Link to tablet view](https://gyazo.com/0ac0537aa2db4ca414d1f31605df9356)
 
 -[Link to mobile view](https://gyazo.com/6b49ffad0c382bc11c50a31b9043443e)
-
-**WEBSITE**
-http://localhost:8080/
