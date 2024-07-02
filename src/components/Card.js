@@ -15,9 +15,6 @@ export default class Card {
     this._handleCardDelete = handleCardDelete;
     this._handleLikeClick = handleLikeClick;
 
-    console.log("name", name);
-    console.log("link", link);
-
     this._cardElement = document
       .querySelector(this._cardSelector)
       .content.querySelector(".card")
@@ -47,8 +44,6 @@ export default class Card {
     });
 
     this._cardImageEl.addEventListener("click", () => {
-      console.log("this._name", this._name);
-      console.log("this._link", this._link);
       this._handleImageClick(this._name, this._link);
     });
   }

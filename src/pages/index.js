@@ -105,16 +105,21 @@ const addCardPopup = new PopupWithForm("#add-image-modal", (inputValues) => {
 });
 
 const deleteCardModal = new PopupWithForm("#remove-card-modal");
-deleteCardModal.setEventListeners();
-
 function handleCardDelete(card) {
   deleteCardModal.open();
   deleteCardModal.setSubmitAction(() => {
     deleteCardModal.renderLoading(true);
-    api.deleteCard(card.id).then(() => {
-      card.deleteCard();
-      deleteCardModal.close();
-    });
+    api
+      .deleteCard(card.id)
+      .then(() => {
+        card.deleteCard();
+        deleteCardModal.renderLoading(false);
+        deleteCardModal.close();
+      })
+      .catch((err) => {
+        console.error("Failed to delete card:", err);
+        deleteCardModal.renderLoading(false);
+      });
   });
 }
 const avatarModalPopup = new PopupWithForm("#avatar-modal", (formData) => {
@@ -170,6 +175,7 @@ changeAvatarImageButton.addEventListener("click", () => {
 imagePopup.setEventListeners();
 profileEditPopup.setEventListeners();
 avatarModalPopup.setEventListeners();
+deleteCardModal.setEventListeners();
 
 /**============================================
  *               Initialization

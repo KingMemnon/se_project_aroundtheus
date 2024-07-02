@@ -21,8 +21,13 @@ export default class PopupWithForm extends Popup {
     this._modalForm.addEventListener("submit", (evt) => {
       evt.preventDefault();
       this._handleFormSubmit(this._getInputValues());
-      this.close();
+      // this.close();
     });
+  }
+
+  open(data) {
+    this._data = data;
+    super.open();
   }
 
   close() {
