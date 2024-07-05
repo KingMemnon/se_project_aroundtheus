@@ -86,22 +86,30 @@ const profileEditPopup = new PopupWithForm(
   "#profile-edit-modal",
   (formData) => {
     profileEditPopup.renderLoading(true);
-    api.setUserInfo(formData).then((userData) => {
-      userInfo.setUserInfo(userData);
-      profileEditPopup.renderLoading(false);
-      profileEditPopup.close();
-    });
+    api
+      .setUserInfo(formData)
+      .then((userData) => {
+        userInfo.setUserInfo(userData);
+        profileEditPopup.close();
+      })
+      .finally(() => {
+        profileEditPopup.renderLoading(false);
+      });
   }
 );
 
 const addCardPopup = new PopupWithForm("#add-image-modal", (inputValues) => {
   addCardPopup.renderLoading(true);
-  api.addCard(inputValues).then((cardData) => {
-    const cardElement = getCardElement(cardData);
-    cardSection.addItem(cardElement);
-    addCardPopup.close();
-    addCardPopup.renderLoading(false);
-  });
+  api
+    .addCard(inputValues)
+    .then((cardData) => {
+      const cardElement = getCardElement(cardData);
+      cardSection.addItem(cardElement);
+      addCardPopup.close();
+    })
+    .finally(() => {
+      addCardPopup.renderLoading(false);
+    });
 });
 
 const deleteCardModal = new PopupWithForm("#remove-card-modal");
@@ -113,15 +121,14 @@ function handleCardDelete(card) {
       .deleteCard(card.id)
       .then(() => {
         card.deleteCard();
-        deleteCardModal.renderLoading(false);
         deleteCardModal.close();
       })
-      .catch((err) => {
-        console.error("Failed to delete card:", err);
+      .finally(() => {
         deleteCardModal.renderLoading(false);
       });
   });
 }
+
 const avatarModalPopup = new PopupWithForm("#avatar-modal", (formData) => {
   const avatarUrl = formData["avatar-form"];
   avatarModalPopup.renderLoading(true);
@@ -129,11 +136,10 @@ const avatarModalPopup = new PopupWithForm("#avatar-modal", (formData) => {
     .setUserAvatar(avatarUrl)
     .then((userData) => {
       userInfo.setUserInfo({ avatar: userData.avatar });
-      avatarModalPopup.renderLoading(false);
       avatarModalPopup.close();
     })
-    .catch((err) => {
-      console.log(err);
+    .finally(() => {
+      avatarModalPopup.renderLoading(false);
     });
 });
 

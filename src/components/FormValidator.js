@@ -11,7 +11,6 @@ export default class FormValidator {
     );
     this._submitButton = formElement.querySelector(this._submitButtonSelector);
   }
-  //testing
   _showInputError(inputElement) {
     const errorMessageEl = this._formElement.querySelector(
       `#${inputElement.id}-error`

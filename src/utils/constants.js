@@ -11,6 +11,11 @@ export const cardSelector = "#card-template";
 export const editProfileFormElement = document.querySelector(
   "#edit-profile-modal"
 );
+export const handleFetchError = (message) => {
+  return (err) => {
+    console.error(`${message}: ${err}`);
+  };
+};
 /**================================================================================================
  *                                         ELEMENT
  *================================================================================================**/

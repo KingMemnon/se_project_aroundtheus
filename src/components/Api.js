@@ -1,4 +1,8 @@
-import { avatarModal, avatarUrlInput } from "../utils/constants";
+import {
+  avatarModal,
+  avatarUrlInput,
+  handleFetchError,
+} from "../utils/constants";
 
 export default class Api {
   constructor({ baseUrl, headers }) {
@@ -13,14 +17,16 @@ export default class Api {
     return Promise.reject(`Error: ${res.status}`);
   }
 
+  _catchError(err) {
+    console.log(err);
+  }
+
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
       headers: this._headers,
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-    });
+    })
+      .then(this._checkResponse)
+      .catch(handleFetchError("Error fetching initals cards"));
   }
 
   addCard(cardData) {
@@ -28,32 +34,26 @@ export default class Api {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify(cardData),
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-    });
+    })
+      .then(this._checkResponse)
+      .catch(handleFetchError("Error adding card"));
   }
 
   deleteCard(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: "DELETE",
       headers: this._headers,
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-    });
+    })
+      .then(this._checkResponse)
+      .catch(handleFetchError("Error deleting card"));
   }
 
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers,
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-    });
+    })
+      .then(this._checkResponse)
+      .catch(handleFetchError("Error fetching user info"));
   }
 
   setUserInfo(formData) {
@@ -61,11 +61,9 @@ export default class Api {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify(formData),
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-    });
+    })
+      .then(this._checkResponse)
+      .catch(handleFetchError("Error setting user info"));
   }
 
   setUserAvatar(avatar) {
@@ -73,12 +71,9 @@ export default class Api {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({ avatar }),
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Error: ${res.status}`);
-    });
+    })
+      .then(this._checkResponse)
+      .catch(handleFetchError("Error setting user avatar"));
   }
 
   updateAvatar(avatarURL) {
@@ -86,21 +81,17 @@ export default class Api {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({ avatar: avatarURL }),
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-    });
+    })
+      .then(this._checkResponse)
+      .catch(handleFetchError("Error updating avatar"));
   }
 
   setCardLikes(cardId, isLiked) {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: isLiked ? "DELETE" : "PUT",
       headers: this._headers,
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-    });
+    })
+      .then(this._checkResponse)
+      .catch(handleFetchError("Error updating card likes"));
   }
 }
