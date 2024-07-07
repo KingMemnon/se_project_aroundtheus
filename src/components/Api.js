@@ -17,16 +17,10 @@ export default class Api {
     return Promise.reject(`Error: ${res.status}`);
   }
 
-  _catchError(err) {
-    console.log(err);
-  }
-
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
       headers: this._headers,
-    })
-      .then(this._checkResponse)
-      .catch(handleFetchError("Error fetching initals cards"));
+    }).then(this._checkResponse);
   }
 
   addCard(cardData) {
@@ -34,26 +28,20 @@ export default class Api {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify(cardData),
-    })
-      .then(this._checkResponse)
-      .catch(handleFetchError("Error adding card"));
+    }).then(this._checkResponse);
   }
 
   deleteCard(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: "DELETE",
       headers: this._headers,
-    })
-      .then(this._checkResponse)
-      .catch(handleFetchError("Error deleting card"));
+    }).then(this._checkResponse);
   }
 
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers,
-    })
-      .then(this._checkResponse)
-      .catch(handleFetchError("Error fetching user info"));
+    }).then(this._checkResponse);
   }
 
   setUserInfo(formData) {
@@ -61,9 +49,7 @@ export default class Api {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify(formData),
-    })
-      .then(this._checkResponse)
-      .catch(handleFetchError("Error setting user info"));
+    }).then(this._checkResponse);
   }
 
   setUserAvatar(avatar) {
@@ -71,9 +57,7 @@ export default class Api {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({ avatar }),
-    })
-      .then(this._checkResponse)
-      .catch(handleFetchError("Error setting user avatar"));
+    }).then(this._checkResponse);
   }
 
   updateAvatar(avatarURL) {
@@ -81,17 +65,13 @@ export default class Api {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({ avatar: avatarURL }),
-    })
-      .then(this._checkResponse)
-      .catch(handleFetchError("Error updating avatar"));
+    }).then(this._checkResponse);
   }
 
   setCardLikes(cardId, isLiked) {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: isLiked ? "DELETE" : "PUT",
       headers: this._headers,
-    })
-      .then(this._checkResponse)
-      .catch(handleFetchError("Error updating card likes"));
+    }).then(this._checkResponse);
   }
 }

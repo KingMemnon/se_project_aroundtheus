@@ -42,27 +42,38 @@ const api = new Api({
 
 let cardSection;
 
-api.getInitialCards().then((cards) => {
-  cardSection = new Section(
-    {
-      items: cards,
-      renderer: (cardData) => {
-        const cardElement = getCardElement(cardData);
-        cardSection.addItem(cardElement);
+api
+  .getInitialCards()
+  .then((cards) => {
+    cardSection = new Section(
+      {
+        items: cards,
+        renderer: (cardData) => {
+          const cardElement = getCardElement(cardData);
+          cardSection.addItem(cardElement);
+        },
       },
-    },
-    ".cards__list"
-  );
-  cardSection.renderItems();
-});
+      ".cards__list"
+    );
+    cardSection.renderItems();
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
 const userInfo = new UserInfo({
   userName: "#profile-title-js",
   userAbout: "#profile-description-js",
   userAvatar: ".profile__image",
 });
-api.getUserInfo().then((userData) => {
-  userInfo.setUserInfo(userData);
-});
+api
+  .getUserInfo()
+  .then((userData) => {
+    userInfo.setUserInfo(userData);
+  })
+  .catch((err) => {
+    console.log("Failed to fetch user info:", err);
+  });
 
 /**================================================================================================
  *                                         FUNCTION
@@ -78,6 +89,7 @@ function getCardElement(cardData) {
   );
   return card.getView();
 }
+
 /**------------------------------------------------------------------------------------------------
  *                                         EVENT HANDLERS
  *------------------------------------------------------------------------------------------------**/
@@ -91,6 +103,9 @@ const profileEditPopup = new PopupWithForm(
       .then((userData) => {
         userInfo.setUserInfo(userData);
         profileEditPopup.close();
+      })
+      .catch((err) => {
+        console.log("Failed to update user info:", err);
       })
       .finally(() => {
         profileEditPopup.renderLoading(false);
@@ -106,6 +121,9 @@ const addCardPopup = new PopupWithForm("#add-image-modal", (inputValues) => {
       const cardElement = getCardElement(cardData);
       cardSection.addItem(cardElement);
       addCardPopup.close();
+    })
+    .catch((err) => {
+      console.log("Failed to add card:", err);
     })
     .finally(() => {
       addCardPopup.renderLoading(false);
@@ -123,6 +141,9 @@ function handleCardDelete(card) {
         card.deleteCard();
         deleteCardModal.close();
       })
+      .catch((err) => {
+        console.log("Failed to delete card:", err);
+      })
       .finally(() => {
         deleteCardModal.renderLoading(false);
       });
@@ -138,6 +159,9 @@ const avatarModalPopup = new PopupWithForm("#avatar-modal", (formData) => {
       userInfo.setUserInfo({ avatar: userData.avatar });
       avatarModalPopup.close();
     })
+    .catch((err) => {
+      console.log("Failed to update avatar:", err);
+    })
     .finally(() => {
       avatarModalPopup.renderLoading(false);
     });
@@ -150,9 +174,14 @@ function handleImageClick(name, link) {
 }
 
 function handleLikeClick(card) {
-  api.setCardLikes(card.id, card.isLiked).then((newCardData) => {
-    card.updateLikes(newCardData.isLiked);
-  });
+  api
+    .setCardLikes(card.id, card.isLiked)
+    .then((newCardData) => {
+      card.updateLikes(newCardData.isLiked);
+    })
+    .catch((err) => {
+      console.log("Failed to update card likes status:", err);
+    });
 }
 
 /**================================================================================================
